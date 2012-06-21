@@ -1,0 +1,138 @@
+
+import "NameTT.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation TypeTT (in jast:"JavaAbstractSyntax") {
+ 
+  jast.Type::getTypeCode() : String {
+		if(self.oclIsTypeOf(jast.ArrayType)) result = self.getArrayTypeCode()
+		else if(self.oclIsTypeOf(jast.ParameterizedType)) result = self.getParameterizedTypeCode()
+		else if(self.oclIsTypeOf(jast.PrimitiveType)) result = self.getPrimitiveTypeCode()
+		else if(self.oclIsTypeOf(jast.QualifiedType)) result = self.getQualifiedTypeCode()
+		else if(self.oclIsTypeOf(jast.SimpleType)) result = self.getSimpleTypeCode()
+		else if(self.oclIsTypeOf(jast.WildcardType)) result = self.getWildcardTypeCode()
+  }
+
+
+      		/**
+ 			* This rule returns the code of a ArrayType.
+ 			*/
+      		jast.ArrayType::getArrayTypeCode() : String {
+      		  
+      		  	result += self.componentType.getTypeCode() + "[] "
+      		  	//TODO tratar arrays multidimensionais...
+      			//result = "ARRAYTYPE NOT IMPLEMENTED YET..."
+    		}
+
+      		/**
+ 			* This rule returns the code of a ParameterizedType.
+ 			*/
+      		jast.ParameterizedType::getParameterizedTypeCode() : String {
+			     var typeCode : String = self.type.getTypeCode()
+			     var argTypeCode : String = ""
+			     if(not self.typeArguments.isEmpty()){
+			      	argTypeCode += "<"
+			      	self.typeArguments->forEach(arg : jast.Type){
+			      	 	argTypeCode += arg.getTypeCode()
+			      	 	if( not self.typeArguments.last() == arg) argTypeCode += ", "
+			      	} 
+			      	argTypeCode += ">"
+			     }
+			  	 result = typeCode + argTypeCode
+    		}
+
+      		/**
+ 			* This rule returns the code of a PrimitiveType.
+ 			*/
+      		jast.PrimitiveType::getPrimitiveTypeCode() : String {
+     			result = self.code
+    		}
+
+      		/**
+ 			* This rule returns the code of a QualifiedType.
+ 			*/
+      		jast.QualifiedType::getQualifiedTypeCode() : String {
+      			result = "QUALIFIEDTYPE NOT IMPLEMENTED YET..."
+    		}
+
+      		/**
+ 			* This rule returns the code of a SimpleType.
+ 			*/
+      		jast.SimpleType::getSimpleTypeCode() : String {
+      			result = self.name.getNameCode()
+    		}
+
+      		/**
+ 			* This rule returns the code of a WildcardType.
+ 			*/
+      		jast.WildcardType::getWildcardTypeCode() : String {
+      			result = "WILDCARDTYPE NOT IMPLEMENTED YET..."
+    		}
+  
+  // ********************* DELEGATION ********************
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a ArrayType to another rule 
+* called getArrayTypeCode():String 
+*/
+jast.ArrayType::getTypeCode() : String {
+result = self.getArrayTypeCode()
+}
+
+
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a ParameterizedType to another rule 
+* called getParameterizedTypeCode():String 
+*/
+jast.ParameterizedType::getTypeCode() : String {
+result = self.getParameterizedTypeCode()
+}
+
+
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a PrimitiveType to another rule 
+* called getPrimitiveTypeCode():String 
+*/
+jast.PrimitiveType::getTypeCode() : String {
+result = self.getPrimitiveTypeCode()
+}
+
+
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a QualifiedType to another rule 
+* called getQualifiedTypeCode():String 
+*/
+jast.QualifiedType::getTypeCode() : String {
+result = self.getQualifiedTypeCode()
+}
+
+
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a SimpleType to another rule 
+* called getSimpleTypeCode():String 
+*/
+jast.SimpleType::getTypeCode() : String {
+result = self.getSimpleTypeCode()
+}
+
+
+	//belongs to Type
+/**
+* This rule delegates the role of returning the code of a WildcardType to another rule 
+* called getWildcardTypeCode():String 
+*/
+jast.WildcardType::getTypeCode() : String {
+result = self.getWildcardTypeCode()
+}
+
+  
+  
+}//textransformation

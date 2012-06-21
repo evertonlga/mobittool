@@ -1,0 +1,55 @@
+ 
+import "../../core/JavaCG.m2t"
+
+texttransformation CommentCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a BlockComment.
+	*/
+	module::getBlockCommentCollectionCode(blockComments : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		blockComments->forEach(someBlockComment:JAS.BlockComment){
+			code += someBlockComment.getBlockCommentCode()
+			if(someBlockComment != blockComments.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Javadoc.
+	*/
+	module::getJavadocCollectionCode(javadocs : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		javadocs->forEach(someJavadoc:JAS.Javadoc){
+			code += someJavadoc.getJavadocCode()
+			if(someJavadoc != javadocs.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a LineComment.
+	*/
+	module::getLineCommentCollectionCode(lineComments : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		lineComments->forEach(someLineComment:JAS.LineComment){
+			code += someLineComment.getLineCommentCode()
+			if(someLineComment != lineComments.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+}

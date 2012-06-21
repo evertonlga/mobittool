@@ -1,0 +1,107 @@
+ 
+import "../../core/JavaCG.m2t"
+
+texttransformation TypeCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a ArrayType.
+	*/
+	module::getArrayTypeCollectionCode(arrayTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		arrayTypes->forEach(someArrayType:JAS.ArrayType){
+			code += someArrayType.getArrayTypeCode()
+			if(someArrayType != arrayTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ParameterizedType.
+	*/
+	module::getParameterizedTypeCollectionCode(parameterizedTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		parameterizedTypes->forEach(someParameterizedType:JAS.ParameterizedType){
+			code += someParameterizedType.getParameterizedTypeCode()
+			if(someParameterizedType != parameterizedTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a PrimitiveType.
+	*/
+	module::getPrimitiveTypeCollectionCode(primitiveTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		primitiveTypes->forEach(somePrimitiveType:JAS.PrimitiveType){
+			code += somePrimitiveType.getPrimitiveTypeCode()
+			if(somePrimitiveType != primitiveTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a QualifiedType.
+	*/
+	module::getQualifiedTypeCollectionCode(qualifiedTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		qualifiedTypes->forEach(someQualifiedType:JAS.QualifiedType){
+			code += someQualifiedType.getQualifiedTypeCode()
+			if(someQualifiedType != qualifiedTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SimpleType.
+	*/
+	module::getSimpleTypeCollectionCode(simpleTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		simpleTypes->forEach(someSimpleType:JAS.SimpleType){
+			code += someSimpleType.getSimpleTypeCode()
+			if(someSimpleType != simpleTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a WildcardType.
+	*/
+	module::getWildcardTypeCollectionCode(wildcardTypes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		wildcardTypes->forEach(someWildcardType:JAS.WildcardType){
+			code += someWildcardType.getWildcardTypeCode()
+			if(someWildcardType != wildcardTypes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+}

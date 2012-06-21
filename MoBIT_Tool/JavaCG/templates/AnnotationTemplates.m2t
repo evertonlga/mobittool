@@ -1,0 +1,36 @@
+texttransformation AnnotationTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a MarkerAnnotation.
+	*/
+	module::markerAnnotationTemplate(resolveBoxing:String, resolveUnboxing:String, typeName:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MarkerAnnotation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a NormalAnnotation.
+	*/
+	module::normalAnnotationTemplate(resolveBoxing:String, resolveUnboxing:String, typeName:String, values:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: NormalAnnotation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SingleMemberAnnotation.
+	*/
+	module::singleMemberAnnotationTemplate(resolveBoxing:String, resolveUnboxing:String, typeName:String, value:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SingleMemberAnnotation"
+
+	}
+
+
+}

@@ -1,0 +1,28 @@
+São tratados atualmente as realiades onde se localizam um componente cliente servidor e pelo menos um componente cliente, onde deve estar claroa existencia de uma 
+estrutura representando o contexto do sistema.    
+
+Módulo PIM2PITM
+
+	Entrada:
+		Diagrama de Classes KobrA
+		Máquina de Estados do(os) componente Servidor	
+	
+	Saída:
+		Modelo PITM que inclui: diagrama de classes da arquitetura de testes + diagrama de sequência dos casos de teste gerados a partir da máquina de estados 
+		(usando Chinese Postman adaptado)
+
+Módulo PITM2PSTM
+
+	Entrada:
+		Diagrama de Classes PITM
+		Diagrama de  sequência dos casos de teste (colcocar dentro do Model)
+	
+	Saída:
+		Modelo PSTM: toda a arquitetura de testes seguindo o modelos Java (JAS)
+		
+JavaCG
+	
+	Entrada:
+		Modelos Java PSTM
+	Saída:
+		Código concreto Java do PSTM

@@ -1,0 +1,58 @@
+
+import "util/Util_VariableDeclarationTT.m2t"
+import "TypeTT.m2t"
+import "NameTT.m2t"
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation VariableDeclarationTT (in jast:"JavaAbstractSyntax") {
+  
+			jast.VariableDeclaration::getVariableDeclarationFragment():String{
+				if(self.oclIsKindOf(jast.SingleVariableDeclaration)) result = self.getSingleVariableDeclarationCode()
+				else if(self.oclIsKindOf(jast.VariableDeclarationFragment)) result = self.getVariableDeclarationFragmentCode()
+			}
+
+      		/**
+ 			* This rule returns the code of a SingleVariableDeclaration.
+ 			*/
+      		jast.SingleVariableDeclaration::getSingleVariableDeclarationCode() : String {
+				    property s : String = " "
+				    var modifiers : String = getModifiers(self.modifiers)
+				    var type : String = self.type.getTypeCode()
+				    var name : String = self.name.getNameCode()
+				  	result = modifiers + s + type + s + name
+    		}
+
+      		/**
+ 			* This rule returns the code of a VariableDeclarationFragment.
+ 			*/
+      		jast.VariableDeclarationFragment::getVariableDeclarationFragmentCode() : String {
+      			result = "VARIABLEDECLARATIONFRAGMENT NOT IMPLEMENTED YET..."
+    		}
+    		
+    		
+    		//************************ DELEGATION *******************
+
+	//belongs to VariableDeclaration
+			/**
+			* This rule delegates the role of returning the code of a SingleVariableDeclaration to another rule 
+			* called getSingleVariableDeclarationCode():String 
+			*/
+			jast.SingleVariableDeclaration::getVariableDeclarationCode() : String {
+				result = self.getSingleVariableDeclarationCode()
+			}
+			
+			
+				//belongs to VariableDeclaration
+			/**
+			* This rule delegates the role of returning the code of a VariableDeclarationFragment to another rule 
+			* called getVariableDeclarationFragmentCode():String 
+			*/
+			jast.VariableDeclarationFragment::getVariableDeclarationCode() : String {
+				result = self.getVariableDeclarationFragmentCode()
+			}
+
+
+}//texttransformation

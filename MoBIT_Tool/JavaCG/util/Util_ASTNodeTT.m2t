@@ -1,0 +1,150 @@
+import "../ASTNodeTT.m2t"
+
+textmodule Util_ASTNodeTT (in jast:"JavaAbstractSyntax"){
+  /**
+   *
+   */
+  module::getModifiers(mList : List): String {
+    mList->forEach(m : jast.Modifier){
+     	result+= m.getASTNodeCode() + " "
+    }
+  }
+  
+  /**
+   * DOC THIS !!!
+   */
+	module::getArguments(arguments : List): String {
+  	  arguments->forEach(argumento){
+	   if(argumento.oclIsKindOf(jast.Name)){
+	      result += argumento.getNameCode()
+	   }else {
+	     	if(argumento.oclIsKindOf(jast.Annotation)){
+	      		result += argumento.getAnnotationCode()
+	   		}else{
+	   	  		result += argumento.getExpressionCode()
+	     	}
+	   }	  
+	   	if(argumento != arguments.last()) result += ", "
+	  }//forEach
+	}
+	
+  /**
+   *
+   */
+  module::getTypeParametersCode(plist : List) : String{
+   var temp : String = "<"
+   plist->forEach(param : jast.TypeParameter){
+     if(plist.last() == param){
+       temp += param.getASTNodeCode()
+     }else{
+       temp += param.getASTNodeCode() + ","
+     }
+   }
+   temp += ">"
+   if(plist.size() == 0){
+     result = ""
+   }else{
+     result = temp
+   }
+  }//getTypeParametersCode
+  
+     /**
+    *
+    */
+    jast.Modifier::public() : String{
+      if(self.public){
+        result  = "public"
+      }else{
+       	result  = "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::transient() : String{
+      if(self.transient){
+       result =  "transient"
+      }else{
+       	result =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::syncronized() : String{
+      if(self.synchronized){
+        result  = "synchronized"
+      }else{
+       	result  = "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::protected() : String{
+      if(self.protected){
+        result  =  "protected"
+      }else{
+       	 result  =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::private()  : String{
+      if(self.private){
+         result  =  "private"
+      }else{
+       	 result  =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::native() : String{
+      if(self.native){
+         result  =  "native"
+      }else{
+       	 result  =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::final() : String {
+      if(self.final){
+         result  =  "final"
+      }else{
+       	 result  =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::static() : String{
+      if(self.static){
+        result =  "static"
+      }else{
+       	result =  "" 
+      }
+    }
+    
+    /**
+    *
+    */
+    jast.Modifier::_abstract() : String {
+      if(self._getFeature("abstract")){
+       result =  "abstract"
+      }else{
+       result =  "" 
+      }
+    }
+  
+}

@@ -1,0 +1,1196 @@
+module PIM2PITM; 
+create OUT : uml2 from IN : uml2, KobrA : uml2, BIT : uml2;
+
+helper def: set:
+	Sequence(uml2!Class) = Sequence{};
+	
+helper def: servers:
+	Set(uml2!Class) = Set{}; 
+	
+helper def: client:
+	Set(uml2!Class) = Set{}; 
+	
+helper def: verdict:
+	uml2!Enumeration =   uml2!Enumeration->allInstances()->first();
+
+helper def: arbiter:
+	uml2!Class =   uml2!Class->allInstances()->first();
+
+helper def: testable:
+	uml2!Class =   '';
+
+helper def: boolType: 
+	uml2!PrimitiveType = uml2!PrimitiveType->allInstances()->first();
+
+helper def: begin: 
+	uml2!State = '';
+
+helper def:model: 
+	uml2!Model = '';
+
+helper def: interaction: 
+	uml2!Interaction = '';
+
+helper def: collaboration:
+	uml2!Collaboration = '';
+
+helper def: firstState:
+	uml2!State = '';
+
+helper def: transNull:
+	uml2!Transition = '';
+
+helper def: pack:
+	uml2!Package = '';
+
+helper def:model: 
+	uml2!Model = '';
+
+helper def:BIT_Profile: 
+	uml2!Profile = '';
+
+helper def: server: 
+	uml2!Class = '';
+
+helper def: numberTC:
+	Integer = 1;
+
+helper def: IntOp:
+	uml2!InteractionOperand = '';
+
+helper def: IFs:
+	Integer = 0;
+ 
+helper def: int:
+	Integer = 0;
+
+helper def: numberEvents:
+	Integer = 0;
+
+helper def: tr:
+	uml2!Transition = '';
+
+helper def: include:
+	Boolean = '';
+
+helper def: parameters:
+	Set(String) = Set{};
+
+helper def: variables:
+	Integer = 0;
+
+	
+------------------ Copia elementos essenciais do modelo de origem para o modelo de destino (contorno para o problema do refining) ------------
+rule copyElements{
+	from m: uml2!Model
+	using{
+		elements: Set(uml2!PackageableElement) = m.getPackagedElements();
+	}
+	to 
+	model: uml2!Model(
+		packagedElement <- Set{}
+	)
+	do{
+		thisModule.model <- model;
+		thisModule.BIT_Profile<- uml2!Profile.allInstances()->select(e | e.name = 'BIT')->first();
+		for (p in uml2!Profile.allInstances()){
+			model.applyProfile(p);
+		}
+		for (e in elements){
+			if (e.oclIsTypeOf(uml2!Class)= true)
+				self.createClass(e);
+			else if (e.oclIsTypeOf(uml2!Enumeration)= true)
+				self.createEnum(e);
+		}
+		for (e in elements){
+			if (e.oclIsTypeOf(uml2!Class)= true){
+				self.createAtt(e);
+				if (not e.getOwnedOperations().isEmpty())
+					for (o in e.getOwnedOperations()){
+						self.createOpers(e, o);
+					}
+			}
+			else if (e.oclIsTypeOf(uml2!Association)= true)
+				self.createAssoc(e);
+		}
+		for (pack in m.getImportedPackages()){
+			model.createPackageImport(pack);
+		}
+		self.createModel();
+	}
+}
+
+------Copia classe----
+rule createClass(c: uml2!Class){
+	using{
+		stereo: uml2!Stereotype = '';
+	}
+	to 
+	class: uml2!Class(
+		name <- c.name,
+		ownedOperation <- Set{}
+	)
+	do{
+		thisModule.model.packagedElement <- thisModule.model.packagedElement->including(class);
+		for (s in c.getAppliedStereotypes()){
+			class.applyStereotype(thisModule.BIT_Profile.getOwnedStereotypes()->select(s | s.name = c.getAppliedStereotypes()->first().name)->first());
+		}
+	}
+}
+
+
+--- Copia atributos---------
+rule createAtt(c: uml2!Class){
+	using{
+		class: uml2!Class = thisModule.model.packagedElement->select(e | e.oclIsTypeOf(uml2!Class))->select(cl | cl.name = c.name)->first();
+	}
+	do{
+		for (a in c.getOwnedAttributes()){
+			self.selfAtt(a, class);
+		}	
+	}
+}
+
+rule selfAtt(p: uml2!Property, c: uml2!Class){
+	using{
+	}
+	to
+	prop: uml2!Property(
+	)
+	do{
+		if (p.type.oclIsTypeOf(uml2!Class)= true){
+				prop.type <- p.type;
+				c.ownedAttribute <- c.ownedAttribute->including(prop);	
+		}
+	}
+}
+
+
+------------ Copia operations ---------------
+rule createOpers(c: uml2!Class, o :uml2!peration){
+	using{	
+		class: uml2!Class = thisModule.model.packagedElement->select(e | e.oclIsTypeOf(uml2!Class))->select(cl | cl.name = c.name)->first();
+		params: Set(uml2!Parameter) = o.ownedParameter->select (par | par.direction <> #out and par.direction <> #return and par.name.oclIsUndefined() = false);
+	}
+	to
+	op: uml2!Operation(
+		name <- o.name,
+		ownedParameter <- Set{}
+	)
+	do{
+		for (p in params){
+			self.copyParameter(op, p);
+		}
+		class.ownedOperation <- class.ownedOperation->including(op);	
+	}
+}
+
+rule copyParameter(op: uml2!Operation, p :uml2!Parameter){
+	to
+	pc: uml2!Parameter(
+		name <- p.name,
+		type <- p.type
+	)
+	do{
+		op.ownedParameter <- op.ownedParameter->including(pc); 
+	}
+}
+
+----------------- Copia Enumeration ---------------------
+rule createEnum(e: uml2!Class){
+	using{
+	}
+	to 
+	enum: uml2!Enumeration(
+		name <- e.name,
+		ownedLiteral <- Set{}
+	)
+	do{
+		thisModule.model.packagedElement <- thisModule.model.packagedElement->including(enum);
+		for (l in e.getOwnedLiterals()){
+			self.createEnumLit(enum, l); 	
+		}
+	}
+}
+
+rule createEnumLit(e: uml2!Enumeration, l: uml!EnumerationLiteral){
+	using{
+	}
+	to 
+	lit: uml2!EnumerationLiteral(
+		name <- l.name
+	)
+	do{
+		e.ownedLiteral <- e.ownedLiteral->including(lit);
+	}
+}
+
+--------------- Copia Association -------------------
+rule createAssoc(a: uml2!Association){
+	using{
+		stereo: uml2!Stereotype = '';
+		class: uml2!Class = '';
+		prop: uml2!Property = '';
+	}
+	to 
+	as: uml2!Association(
+		memberEnd <- Set{}
+	)
+	do{
+		for (p in a.ownedEnd){
+			self.createPropAssoc(as, p);
+		}
+		if (a.getMemberEnds()->at(1).type.name = as.ownedEnd->first().type.name){
+			class <- thisModule.model.packagedElement->select(e | e.oclIsTypeOf(uml2!Class))->select(cl | cl.name = a.getMemberEnds()->at(1).type.name)->first();
+			prop <- class.ownedAttribute->select(p |p.type.name = a.getMemberEnds()->at(2).type.name)->first();
+			as.memberEnd <- as.memberEnd->including(prop);
+		}else{
+			class <- thisModule.model.packagedElement->select(e | e.oclIsTypeOf(uml2!Class))->select(cl | cl.name = a.getMemberEnds()->at(2).type.name)->first();
+			prop <- class.ownedAttribute->select(p |p.type.name = a.getMemberEnds()->at(1).type.name)->first();
+			as.memberEnd <- as.memberEnd->including(prop);
+		}
+				
+			
+		thisModule.model.packagedElement <- thisModule.model.packagedElement->including(as);
+		for (s in a.getAppliedStereotypes()){
+			if (not a.getAppliedStereotypes().isEmpty()){
+				as.applyStereotype(thisModule.BIT_Profile.getOwnedStereotypes()->select(st | st.name = s.name)->first());
+			}
+		}
+		
+		 
+	}
+}
+
+rule createPropAssoc(as: uml2!Association, p: uml2!Property){
+	using{
+		class: uml2!Class = thisModule.model.packagedElement->select(e | e.oclIsTypeOf(uml2!Class))->select(cl | cl.name = p.type.name)->first();
+	}
+	to
+	prop: uml2!Property(
+		type <- class
+	)
+	do{
+		as.ownedEnd <- as.ownedEnd->including(prop);
+	}
+}
+	
+	
+------------------------------------------ Localizando Cliente e Servidor -------------------------------------------------------	
+rule createModel(){
+	using{
+		cont:Set(uml2!Class) = uml2!Class->allInstances()->select(c | c.getAppliedStereotypes()->exists(s|s.name='Context'))->first();
+		v1 : Sequence(uml2!Property) = uml2!Association->allInstances()->select(a | a.memberEnd->exists(me | me.type = cont))->collect(a | a.memberEnd)->flatten()->select(me|me.type<> cont);
+		v2 : Sequence(String) = uml2!Property->allInstances()->select( p | uml2!Association->allInstances()->select(a | a.memberEnd->exists(me | me.type = cont))->collect(a | a.memberEnd)->flatten()->select(me|me.type <> cont)->includes(p))->collect(p|p.type);-->collect(n|n.name) ;
+		
+		ass: Sequence(uml2!Class) = uml2!Association->allInstances()->select(a | a.memberEnd->exists(me | me.type = cont))->collect(m | m.memberEnd->collect(c | c.type))->flatten()->excluding(cont);
+		assocWithContx: Sequence(uml2!Association) = uml2!Association->allInstances()->select(a | a.memberEnd->exists(me | me.type = cont))->collect(a | a.memberEnd)->flatten()->select(c | c.type <> cont);
+		allAss: Sequence(uml2!Association) = uml2!Association->allInstances()->select(a | a.memberEnd->size()>0);
+		
+	}
+	
+	do{
+		for (ass in assocWithContx){
+			for (ass2 in assocWithContx){
+				if (ass.type.name <> ass2.type.name){
+					thisModule.set<-Sequence{ass.type};
+					thisModule.set<-thisModule.set->including(ass2.type);
+					for (a in allAss){
+						if (a.memberEnd->collect(c | c.type)->includesAll(thisModule.set) ){						
+							thisModule.servers<- thisModule.servers->including(a.memberEnd->at(2).type);
+						}
+					}
+				}				
+			}
+		}
+		
+		for (c in v2){
+			if (not thisModule.servers->includes(c))
+				thisModule.client<- thisModule.client->including(c);
+		}
+
+		thisModule.servers.toString().println();
+		thisModule.client.toString().println();
+		self.configure();
+		
+	} 
+}
+
+------------ Inicia a criação das classes de teste e das classes auxiliares ---------------
+rule configure(){
+	do{
+		self.createVerdict (thisModule.model);
+		self.createArbiter(thisModule.model);
+		for (client in thisModule.client){
+			for (server in thisModule.servers){
+				thisModule.server <- server;
+				self.createClassOfTest(thisModule.model, client, server);
+			}
+		}
+	}
+}
+
+-------------- Criação do enumeration Verdict --------------
+rule createVerdict( model:uml2!Model){
+	to
+	
+	ver: uml2!Enumeration(
+		name<- 'Verdict',
+		ownedLiteral <- Set{pass,fail,inconclusive, error}
+	),
+		
+	pass : uml2!EnumerationLiteral(
+		name <- 'pass'
+	),
+		
+	fail : uml2!EnumerationLiteral(
+		name <- 'fail'
+	),
+		
+	inconclusive : uml2!EnumerationLiteral(
+		name <- 'inconclusive'
+	),
+
+	error : uml2!EnumerationLiteral(
+		name <- 'error'
+	)	
+	
+	do{
+		thisModule.verdict<-ver;	
+		model.packagedElement <- model.packagedElement->including(ver);
+	}
+}
+
+-------------- Criação do classe Arbitert --------------
+rule createArbiter (model: uml2!Model){
+	to
+	arb:uml2!Class(
+		name <- 'Arbiter',
+		ownedAttribute<- Set{ver1, partialVerd},
+		ownedOperation <- Set{ooArbiter1, ooArbiter2, ooArbiter3}
+	),
+	
+	ver1: uml2!Property(
+		name<- 'verdict',
+		type<- thisModule.verdict
+	),
+	
+	partialVerd: uml2!Property(
+		name<- 'partialVerdict',
+		type<- thisModule.verdict
+	),
+	
+	ooArbiter1:uml2!Operation(
+		name <- 'getVerdict',
+		ownedParameter <- paramGetVeredict,
+		visibility <- #public
+	),
+
+	paramGetVeredict:uml2!Parameter(
+		type <- thisModule.verdict,
+		name <- 'v',
+		direction <- #return
+	),
+	
+	ooArbiter2:uml2!Operation(
+		name <- 'setVerdict',
+		visibility <- #public,
+		ownedParameter <- paramSetVeredict
+	),
+	
+	paramSetVeredict:uml2!Parameter(
+		name <- 'b',
+		type <- boolType
+	),	
+	
+	boolType: uml2!PrimitiveType(
+		name <- 'boolean'
+	),
+
+	ooArbiter3:uml2!Operation(
+		name <- 'definesParcialVerdict',
+		visibility <- #public
+	)
+	do{
+		thisModule.arbiter<-arb;
+		thisModule.boolType<- boolType;
+		model.packagedElement <- model.packagedElement->including(arb)->including(boolType);
+
+	}
+}
+
+--------------- Criação das classes de teste ---------------------
+rule createClassOfTest (model: uml2!Model, client:uml2!Class, server:uml2!Class){
+	using{
+		stateMachine: uml2!StateMachine  = uml2!StateMachine->allInstances()->select(s | s.name = server.name)->first();
+		states: Sequence(uml2!State) = stateMachine.region->first().getSubvertices()->select(s | s.oclIsTypeOf(uml2!Pseudostate)<> true)->select(s | s.oclIsTypeOf(uml2!FinalState)<> true);
+		c: uml2!Class = uml2!Class->allInstances()->select(c | c.name = client.name);
+	
+		stereoTC :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'Testing Component')->first();
+		stereoTesting :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'testing')->first();
+		stereoTestingInter :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'testing Interface' )->first();
+		stereoSS :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'stateSetting' )->first();
+		stereoSC :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'stateCheking' )->first();
+	
+		stereoAc :  uml2!Stereotype = uml2!Profile->allInstances()->select(p | p .name = 'BIT') ->first().getOwnedStereotypes() ->select(s | s.name = 'acquires' )->first();
+	}
+	-- Criação da classe Testing do Client
+	to 	
+	pack: uml2!Package(
+	 	packagedElement<- Set{}
+	 ),
+	 
+	subc:uml2!Class(	
+	    superClass <- currentClient,
+		generalization <- Set{genc},
+		name <- 'Testing' + client.name,
+		ownedAttribute<- Set{atribTesting},
+		ownedOperation <- Set{oo1,oo2,oo3}
+	),
+	
+	currentClient: uml2!Class(
+		name <- client.name
+	),
+	
+	genc:uml2!Generalization(
+		specific <- subc,
+		general <- currentClient
+	),
+
+	atribTesting: uml2!Property(
+		name<- 'verdict',
+		type<- thisModule.verdict
+	),
+	
+	oo1:uml2!Operation(
+		name <- 'setTester',
+		visibility <- #public,
+		ownedParameter <- param1
+	),
+	
+	oo2:uml2!Operation(
+		name <- 'setServer',
+		visibility <- #public,
+		ownedParameter <- param2
+	),
+	
+	oo3:uml2!Operation(
+		name <- 'performedTest',
+		visibility <- #public
+	),
+		
+	param1:uml2!Parameter(
+		name <- 'tester',
+		type <- sTester
+	),
+		
+	param2:uml2!Parameter(
+		name <- 'server',
+		type <- subs
+	),
+
+-- Criação da classe Tester
+	sTester:uml2!Class(
+		name <- server.name +  'Tester',
+		ownedOperation <- Set{ooTester1},
+		ownedAttribute<- Set{atrib}		
+	),
+	ooTester1:uml2!Operation(
+		name <- 'executeTest',
+		ownedParameter <- Set{par},
+		visibility <- #public
+	),
+			
+	par:uml2!Parameter(
+		name <- 'testable',
+		type <- subs
+	),
+	
+	assoc1: uml2!Association(
+		memberEnd <- Set{prop11, prop12},
+		navigableOwnedEnd <- Set{prop12}
+	),
+	prop11: uml2!Property(
+		type <- subc
+	),
+	prop12: uml2!Property(
+		type <- sTester
+	),
+
+	assoc2: uml2!Association(
+		memberEnd <- Set{prop21, prop22},
+		navigableOwnedEnd <- Set{prop22}
+	),
+	prop21: uml2!Property(
+		type <- sTester
+	),
+	prop22: uml2!Property(
+		type <- subs
+	),
+
+	atrib: uml2!Property(
+		name<- 'arbiter',
+		type<- thisModule.arbiter
+	),
+	
+
+----  Criação da classe Testable do sever
+	subs: uml2!Class(
+		superClass <- server,
+		generalization <- gens,
+		name <- 'Testable' + server.name,
+		ownedOperation <- Set{}
+	),
+	
+	currentServer: uml2!Class(
+		name <- server.name
+	),
+	
+	gens:uml2!Generalization(
+		specific <- subs,
+		general <- currentServer
+	)
+	
+do{				
+		thisModule.tester <- sTester;
+				
+		pack.packagedElement <- pack.packagedElement ->including(subc)->including(subs)->including(sTester)->including(assoc1)->including( assoc2);		
+		model.packagedElement <- model.packagedElement ->including(pack);
+		thisModule.pack <- pack;
+		subc.applyStereotype(stereoTC);
+		subs.applyStereotype(stereoTC);
+		sTester.applyStereotype(stereoTC);
+		assoc1.applyStereotype(stereoAc);
+		assoc2.applyStereotype(stereoAc);
+		
+		for (state in states){	
+
+			self.createOperationOfChecking(subs,state, pack, model);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoTestingInter);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoTesting);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoSC);
+			
+			self.createOperationOfSetting(subs,state, pack);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoTestingInter);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoTesting);
+			subs.ownedOperation->at(subs.ownedOperation->size()).applyStereotype(stereoSS);
+		}
+		 
+		model.packagedElement<- model.packagedElement->including(currentClient)->including(currentServer);
+		thisModule.testable <- subs;
+		thisModule.model <- model;
+		
+		self.adaptStateMachine(stateMachine);
+	}
+}
+
+----
+rule createOperationTestCase(i: uml2!Interaction, class: uml2!Class ){
+	to oo : uml2!Operation(
+			name <- i.name	
+	)
+	do{
+		class.ownedOperation <- class.ownedOperation->including(oo);
+	}
+}
+
+---- Criação dos metodos de checagem da classe Testable do sever
+rule createOperationOfChecking(class : uml2!Class, state: uml2!State, pack: uml2!Package, model:uml2!Model){
+	using{
+
+	}
+	to op: uml2!Operation (
+			name <- 'isIn'+state.name,
+			ownedParameter <- paramBool
+		),
+		
+		paramBool:uml2!Parameter(
+			type <- thisModule.boolType,
+			name <- 'b',
+			direction <- #return
+		)
+		
+	do{
+		class.ownedOperation <- class.ownedOperation->including(op);
+	
+	}
+}
+
+-- Criação dos metodos de set da classe Testable do sever
+rule createOperationOfSetting(class : uml2!Class, state : uml2!State, pack: uml2!Package){
+	using{
+		transOUT: Set(uml2!Transition) = state.getOutgoings();
+	}
+	to op: uml2!Operation (
+		name <- 'setTo'+state.name
+			
+	)
+	do{
+		thisModule.include <- false;
+		for (t in transOUT){
+			if (t.getGuard().oclIsUndefined() = false){
+				if ( thisModule.include = false){
+					self.createParameterStr(op);
+					thisModule.include <- true;		
+				}
+			}
+		}
+		class.ownedOperation <- class.ownedOperation->including(op);
+	}
+}
+
+-------- Cria o parametro do metodo setToState--------
+rule createParameterStr(op: uml2!Operation){
+	using{
+		types: Set(uml2!Element) = thisModule.model.getImportedPackages()->select(p | p.name = 'UMLPrimitiveTypes')->first().allOwnedElements();
+		typeString: Set(uml2!Element) = types-> select(e | e. oclIsTypeOf(uml2!PrimitiveType))->select(t | t.name = 'String')->first();	
+	}
+	to
+	pr: uml2!Parameter (
+		name <- 'situation',
+		type <- typeString
+	)
+	do{
+		op.ownedParameter <- op.ownedParameter->including(pr); 
+	}
+}
+
+---------------------- Cópia da máquina de estados -----------------------
+rule adaptStateMachine(SM: uml2!StateMachine){
+	--from SM: uml2!StateMachine
+	using{
+		regions: Set(uml2!Region) = SM.region;
+		ve: Set(uml2!Vertex) = regions->collect(c | c.subvertex);
+	}
+	to 
+	SMA: uml2!StateMachine(
+		name <- SM.name,
+		region <- Set{}
+	) 
+	do{
+		thisModule.model.packagedElement <- thisModule.model.packagedElement->including(SMA);
+		for (r in regions){
+			self.createRegion(thisModule.model, SMA, r);
+		}
+		for (r in SMA.region){
+			self.createTestCase(r);
+		}
+		self.updateTesterClass();
+	}
+}
+
+rule createRegion(model: uml2!Model, SM : uml2!StateMachine, r: uml2!Region){
+	using{	}
+	to
+	reg: uml2!Region(
+		subvertex <- Set{beginState},
+		transition <- Set{}
+	),
+	
+	beginState: uml2!State(
+		name <- 'Begin'
+	)
+	 
+	do{ 
+		thisModule.begin <- beginState;
+		
+		for (s in r.getSubvertices()){
+			if ((s.oclIsTypeOf(uml2!Pseudostate)<> true) and (s.oclIsTypeOf(uml2!FinalState)<> true)){
+				self.createState(s, reg);
+			}
+			else{
+				if(s.oclIsTypeOf(uml2!Pseudostate) = true)
+					self.createPseudostate(s, reg);
+				else if (s.oclIsTypeOf(uml2!FinalState) = true)
+					self.createFinalState(s, reg);
+			}
+				
+		}
+		for (t in r.getTransitions()){
+			self.createTransicion(model, t, reg);
+		}
+	
+		SM.region <- SM.region->including(reg);
+				
+	}
+}
+
+rule createState(s : uml2!State, r: uml2!Region){
+	using{
+	}
+	to
+	st: uml2!State(
+		name <- s.name
+	)
+	do{
+		r.subvertex <- r.subvertex->including(st); 
+	}
+}
+
+rule createPseudostate(s : uml2!State, r: uml2!Region){
+	using{
+	}
+	to
+	ps: uml2!Pseudostate(
+		kind <- s.kind
+	)
+	do{
+		r.subvertex <- r.subvertex->including(ps);
+	}
+}
+
+rule createFinalState(s : uml2!State, r: uml2!Region){
+	using{
+	}
+	to
+	ps: uml2!FinalState
+	do{
+		r.subvertex <- r.subvertex->including(ps);
+	}
+}
+
+rule createTransicion(model: uml2!Model, t : uml2!Transition, r: uml2!Region){
+	using{
+	}
+	to
+	tr: uml2!Transition(
+		source <- t.source,
+		target <- t.target,
+		trigger <- Set{}
+	)
+	do{
+		if (t.getTriggers()->size()>0 ){
+			for (trig in t.getTriggers()){
+				self.createTrigger(model,trig, tr);
+			}
+		}
+		if(t.getGuard().oclIsUndefined() = false){
+			tr.setGuard(t.getGuard());
+		}
+			
+		r.transition <- r.transition->including(tr);
+	}
+}
+
+
+rule createTrigger(model: uml!Model, trig: uml2!Trigger, t: uml2!Transition){
+	to
+	tr: uml2!Trigger(
+		event <- ev
+	),
+	
+	ev: uml2!CallEvent(
+		operation <- trig.event.operation
+	)
+	
+	do{
+		t.trigger <- t.trigger->including(tr); 
+		model.packagedElement <- model.packagedElement->including(ev);
+	}
+}
+
+
+--------------------- Aplicação do algoritmo para geração dos casos de teste a partir da máquina de estados ----------------------------
+rule createTestCase (r: uml2!Region){
+	using{
+		pTrans: Set(uml2!Transition) = r.getTransitions()->select(t |t.source.oclIsTypeOf(uml2!Pseudostate)= true or t.target.oclIsTypeOf(uml2!Pseudostate) = true);
+		trans: Set(uml2!Transition)= r.getTransitions();
+		transOri: Set(uml2!Transition)= '';
+		
+		transBeg: uml2!Transition = trans->select(t|t.source.oclIsTypeOf(uml2!Pseudostate)= true)->select(p | p.source.kind = #initial)->first();
+	}
+	to 
+	col: uml2!Collaboration(
+		ownedBehavior <- Set{}
+	),
+	
+	int: uml2!Interaction(
+		fragment <- Set{},
+		name <- 'testCase'+ thisModule.numberTC.toString(),
+		ownedParameter <- Set{}
+	)
+	do{
+		thisModule.numberTC <- thisModule.numberTC + 1;
+		thisModule.interaction <- int;
+		col.ownedBehavior <- col.ownedBehavior->including(int);
+		thisModule.collaboration <- col;
+		trans <- trans->excluding(transBeg);
+						
+		if(transBeg.getTriggers()->size()>0){
+			'1'.println();
+			transBeg.source.toString().println();
+			transBeg.target.toString().println();
+			self.createMessage(transBeg, thisModule.interaction);
+			self.verifyState(transBeg, int);
+		}else {
+			'2'.println();
+			transBeg.source.toString().println();
+			transBeg.target.toString().println();
+			self.verifyState(transBeg, thisModule.interaction); 
+		}
+
+		for (t in pTrans){
+			trans<- trans->excluding(t);
+		}
+		
+		for (t in trans){
+			if (t.target.oclIsTypeOf(uml2!FinalState)= true)
+				trans<- trans->excluding(t); 
+		}
+		self.createMsgs(trans, transBeg,thisModule.collaboration);
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(col);
+	}
+}
+
+------- Regra recursiva que é executada até que todas as transições sejam cobertas -----------
+rule createMsgs(trs: Set(uml2!Transition), tr: uml2!Transition, col: uml2!Collaboration){
+	using{
+		trans: Set(uml2!Transition) = trs->select(t|t.source.name = tr.target.name);
+		length: Integer = trans->size();
+		length2: Integer = trs->size();
+		t : uml2!Transition = '';--thisModule.randonTrans(trans,length);
+		t2 : uml2!Transition = '';--thisModule.randonTrans(trs,length2);
+	}
+	do{
+		self.setRandomTrans(trans,length);
+		t<- thisModule.tr;
+		self.setRandomTrans(trs,length2);
+		t2<- thisModule.tr;
+		if (not trs->isEmpty()){
+			if (not trans->isEmpty()){
+				if(t.getTriggers()->size()>0){
+					self.createMessage(t, thisModule.interaction);
+					self.verifyState(t, thisModule.interaction);
+				}else {
+					if (t.getGuard().oclIsUndefined() = false){
+						self.restartInteraction(thisModule.collaboration);
+						self.setToState(t, thisModule.interaction, t.getGuard());
+						self.verifyState2(t, thisModule.interaction);
+						self.createAlt(thisModule.interaction, t.getGuard());
+						self.verifyState3(t.target, thisModule.interaction);
+					}else{
+						self.verifyState(t, thisModule.interaction);	
+					} 
+				}
+				trs<- trs->excluding(t);
+				self.createMsgs(trs,t,thisModule.interaction);
+			}else{
+				self.restartInteraction(thisModule.collaboration);
+				self.setToState(t2,thisModule.interaction, t.getGuard());
+				self.verifyState2(t2,thisModule.interaction);
+				if(t2.getTriggers()->size()>0){
+					self.createMessage(t2, thisModule.interaction);
+					self.verifyState(t2, thisModule.interaction);
+				}else {
+					self.verifyState(t2, thisModule.interaction); 
+				}
+				trs<- trs->excluding(t2);
+				self.createMsgs(trs,t2,thisModule.interaction);
+			}	
+			
+		}
+				
+	}
+}
+
+
+-------------- Criação de uma mensagem com a chamada de um evento --------------
+rule createMessage(tr: uml2!Transition, int: uml2!Interaction){
+	using{
+		op: uml2!Operation = tr.getTriggers()->first().event.operation;
+		opParamIn: uml2!Parameter = op.ownedParameter->select(par | par.direction <> #out and par.direction <> #return and par.name <> '');
+	}
+	to
+	m: uml2!MessageOccurrenceSpecification( 
+		event <- ce
+	),
+	
+	ce: uml2!CallEvent(
+		operation <- op
+	)
+	
+	do{
+		thisModule.numberEvents <- thisModule.numberEvents+1;
+		ce.name <- thisModule.numberEvents.toString(); 
+				
+		if (tr.getGuard().oclIsUndefined() = false){
+			self.restartInteraction(thisModule.collaboration);
+			self.setToState(tr, thisModule.interaction, tr.getGuard());
+			self.verifyState2(tr, thisModule.interaction);
+			self.createAlt(thisModule.interaction, tr.getGuard());
+			thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m);					
+		}else{
+			if (thisModule.IFs > 0){
+				thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m);	
+			}
+			else{
+				thisModule.interaction.fragment <- thisModule.interaction.fragment->including(m);
+			}
+			
+		}
+		for (p in tr.getTriggers()->first().event.operation.ownedParameter){
+			if (p.name->size() > 0){
+				self.createParameterTC(p);	
+			}
+		}
+
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(ce);
+	}
+}
+
+rule createParameterTC (pr :uml2!Parameter){
+	using{
+		name: String = pr.name;
+	}
+	to
+	pram: uml2!Parameter(
+		--name <- pr.name,
+		type <- pr.type
+	)
+	do{
+		if(thisModule.parameters->count(name) > 0){
+			thisModule.variables <- thisModule.variables + 1;
+			pram.name <- pr.name.concat(thisModule.variables.toString());
+			thisModule.parameters <- thisModule.parameters->including(pram.name);
+		}else{
+			pram.name <- name;
+			thisModule.parameters <- thisModule.parameters->including(pram.name);
+		}
+			
+		thisModule.interaction.ownedParameter <- thisModule.interaction.ownedParameter->including(pram); 
+	}
+}
+-------------------- Regra para captura pseudo-randomica de uma transição -----------------
+rule setRandomTrans (trans :Set(uml2!Transition), length: Integer){
+	using{
+		x: String = '';
+		i: Integer = 0;
+	}
+	do{
+		if (trans->size() > 0){
+			x <- trans->first().__xmiID__.regexReplaceAll('[-!"#$%&()*+,./:;<=>?@_{|}~]','').regexReplaceAll('[A-Za-z]', '');
+			for (c in x.split('')){
+				if (c <> '')
+					i <- i + c.toInteger();	
+			}
+			self.half(i, length, trans);
+		}
+		
+	}
+}
+
+rule half(num: Integer, length: Integer, trans :Set(uml2!Transition)){
+	do{
+		if (num > length){
+			self.half((num/2).round(), length, trans);
+		}			
+		else {
+			thisModule.tr<- trans->at(num);
+		}
+	}
+}
+
+-------- Inicio de um novo caso de teste -----------------
+rule restartInteraction(col: uml2!Collaboration){
+	to 
+	int : uml2!Interaction(
+		fragment<- Set{}, 
+		name <- 'testCase'+ thisModule.numberTC.toString()
+	)
+	do{
+		thisModule.numberTC <- thisModule.numberTC + 1;
+		thisModule.interaction <- int;
+		thisModule.IFs <- 0;
+		thisModule.collaboration.ownedBehavior <- thisModule.collaboration.ownedBehavior->including(int);
+		
+	}
+}
+
+
+------------------ Criação de um fragmento Alternativo no diagrama de sequencia (IF) ----------------
+rule createAlt(int: uml2!Interaction, c: uml2!Constraint){
+	using{
+		constr: String = c.getSpecification().stringValue();
+	}	
+	to
+	cf: uml2!CombinedFragment(
+		operand<- io
+	),
+	
+	io: uml2!InteractionOperand(
+		guard <- ic
+	),
+	
+	ic: uml2! InteractionConstraint(
+		specification <- ls
+	),
+	
+	ls: uml2!LiteralString(
+		value <- ''
+	)
+		 
+	do{
+		constr <- constr.regexReplaceAll(thisModule.server.name.toLower(), 'server');
+			
+		ls.value <- constr;
+		
+		int.fragment <- cf;
+		thisModule.IFs <- thisModule.IFs + 1;
+		thisModule.IntOp <- io;
+	}
+}
+
+-------------------- Criação da msg para verificação de estado ----------------- 
+rule verifyState(tr: uml2!Transition, int: uml2!Interaction){
+	using { 
+		testable: uml2!Class = thisModule.testable;
+	
+		opsIsIn: uml2!Operation = testable.getOperations()->select(a| a.name->size() > 3)
+		->select(o | o.name.substring(1,4)= 'isIn');
+		
+		op: uml2!Operation = opsIsIn->select(o | o.name = 'isIn'+ tr.target.name)->first();
+	}
+	to
+	m: uml2!MessageOccurrenceSpecification(
+		event <- ce
+	),
+	
+	ce: uml2!CallEvent(
+		operation <- op
+	)
+	
+	do{
+		opsIsIn.toString().println();
+		thisModule.numberEvents <- thisModule.numberEvents+1;
+		ce.name <- thisModule.numberEvents.toString();
+		if (thisModule.IFs = 0){
+			int.fragment <- int.fragment->including(m); 
+		}else{
+			thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m); 
+		}
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(ce);
+		
+	}
+}
+
+rule verifyState2(tr: uml2!Transition, int: uml2!Interaction){
+	using { 
+		testable: uml2!Class = thisModule.testable;
+	
+		opsIsIn: uml2!Operation = testable.getOperations()->select(a| a.name->size() > 3)
+		->select(o | o.name.substring(1,4)= 'isIn');
+		
+		op: uml2!Operation = opsIsIn->select(o | o.name = 'isIn'+ tr.source.name)->first();
+	}
+	to
+	m: uml2!MessageOccurrenceSpecification(
+		event <- ce
+	),
+	
+	ce: uml2!CallEvent(
+		operation <- op
+	)
+	
+	do{
+		thisModule.numberEvents <- thisModule.numberEvents+1;
+		ce.name <- thisModule.numberEvents.toString();
+		if (thisModule.IFs = 0){
+			thisModule.interaction.fragment <-thisModule.interaction.fragment->including(m);
+		}else{
+			thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m); 
+		}
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(ce);
+		
+	}
+}
+
+rule verifyState3(st: uml2!State, int: uml2!Interaction){
+	using { 
+
+		testable: uml2!Class = thisModule.testable;	
+
+		opsIsIn: uml2!Operation = testable.getOperations()->select(a| a.name->size() > 3)
+		->select(o | o.name.substring(1,4)= 'isIn');
+		
+		op: uml2!Operation = opsIsIn->select(o | o.name = 'isIn'+ st.name)->first();
+	}
+	to
+	m: uml2!MessageOccurrenceSpecification(
+		event <- ce
+	),
+	
+	ce: uml2!CallEvent(
+		operation <- op
+	)
+	
+	do{
+		thisModule.numberEvents <- thisModule.numberEvents+1;
+		ce.name <- thisModule.numberEvents.toString();
+		if (thisModule.IFs = 0){
+			thisModule.interaction.fragment <-thisModule.interaction.fragment->including(m);
+		}else{
+			thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m); 
+		}
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(ce);
+		
+	}
+}
+
+
+-------------------- Criação da msg para imposição de estado -----------------
+rule setToState(tr: uml2!Transition, int: uml2!Interaction, cont: uml2!Constraint ){
+	using { 
+		testable: uml2!Class = thisModule.testable;
+		constr: String = '';
+
+		opsSetTo: uml2!Operation = testable.getOperations()->select(a| a.name->size() > 4)
+		->select(o | o.name.substring(1,5)= 'setTo');
+		
+		op: uml2!Operation = opsSetTo->select(o | o.name = 'setTo'+ tr.source.name)->first();
+	}
+	to
+	m: uml2!MessageOccurrenceSpecification(
+		event <- ce
+	),
+	
+	ce: uml2!CallEvent(
+		operation <- op,
+		ownedComment <- Set{}
+	)
+	
+	do{
+		thisModule.numberEvents <- thisModule.numberEvents+1;
+		if(cont.oclIsUndefined() = false){
+			constr<- cont.getSpecification().stringValue();
+			constr <- constr.regexReplaceAll(thisModule.server.name.toLower(), 'server');
+			self.createComment(ce, constr);
+		}
+		if (thisModule.IFs = 0){
+			thisModule.interaction.fragment <- thisModule.interaction.fragment->including(m); 
+		}else{
+			thisModule.IntOp.fragment <- thisModule.IntOp.fragment->including(m); 
+		} 
+		
+		thisModule.pack.packagedElement <- thisModule.pack.packagedElement->including(ce);
+		
+	}
+}
+
+rule createComment(ce: uml2!CallEvent, ctr: String){
+	to
+	cm: uml2!Comment(
+		body <- ctr
+	)
+	do{
+		ce.ownedComment <- ce.ownedComment->including(cm); 
+	}
+}
+
+rule updateTesterClass(){
+	do{
+		for (op in uml2!Interaction->allInstances()){
+			self.createOperationTestCase(op, thisModule.tester );
+		}
+	}
+}
+		

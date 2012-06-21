@@ -1,0 +1,6 @@
+import "../StatementTT.m2t"
+
+textmodule Util_StatementTT (in jast:"JavaAbstractSyntax"){
+  
+  
+}

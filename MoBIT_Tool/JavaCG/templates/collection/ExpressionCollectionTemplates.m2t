@@ -1,0 +1,447 @@
+ 
+import "../../core/JavaCG.m2t"
+
+texttransformation ExpressionCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a Annotation.
+	*/
+	module::getAnnotationCollectionCode(annotations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		annotations->forEach(someAnnotation:JAS.Annotation){
+			code += someAnnotation.getAnnotationCode()
+			if(someAnnotation != annotations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ArrayAccess.
+	*/
+	module::getArrayAccessCollectionCode(arrayAccesss : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		arrayAccesss->forEach(someArrayAccess:JAS.ArrayAccess){
+			code += someArrayAccess.getArrayAccessCode()
+			if(someArrayAccess != arrayAccesss.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ArrayCreation.
+	*/
+	module::getArrayCreationCollectionCode(arrayCreations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		arrayCreations->forEach(someArrayCreation:JAS.ArrayCreation){
+			code += someArrayCreation.getArrayCreationCode()
+			if(someArrayCreation != arrayCreations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ArrayInitializer.
+	*/
+	module::getArrayInitializerCollectionCode(arrayInitializers : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		arrayInitializers->forEach(someArrayInitializer:JAS.ArrayInitializer){
+			code += someArrayInitializer.getArrayInitializerCode()
+			if(someArrayInitializer != arrayInitializers.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Assignment.
+	*/
+	module::getAssignmentCollectionCode(assignments : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		assignments->forEach(someAssignment:JAS.Assignment){
+			code += someAssignment.getAssignmentCode()
+			if(someAssignment != assignments.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a BooleanLiteral.
+	*/
+	module::getBooleanLiteralCollectionCode(booleanLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		booleanLiterals->forEach(someBooleanLiteral:JAS.BooleanLiteral){
+			code += someBooleanLiteral.getBooleanLiteralCode()
+			if(someBooleanLiteral != booleanLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a CastExpression.
+	*/
+	module::getCastExpressionCollectionCode(castExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		castExpressions->forEach(someCastExpression:JAS.CastExpression){
+			code += someCastExpression.getCastExpressionCode()
+			if(someCastExpression != castExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a CharacterLiteral.
+	*/
+	module::getCharacterLiteralCollectionCode(characterLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		characterLiterals->forEach(someCharacterLiteral:JAS.CharacterLiteral){
+			code += someCharacterLiteral.getCharacterLiteralCode()
+			if(someCharacterLiteral != characterLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ClassInstanceCreation.
+	*/
+	module::getClassInstanceCreationCollectionCode(classInstanceCreations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		classInstanceCreations->forEach(someClassInstanceCreation:JAS.ClassInstanceCreation){
+			code += someClassInstanceCreation.getClassInstanceCreationCode()
+			if(someClassInstanceCreation != classInstanceCreations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ConditionalExpression.
+	*/
+	module::getConditionalExpressionCollectionCode(conditionalExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		conditionalExpressions->forEach(someConditionalExpression:JAS.ConditionalExpression){
+			code += someConditionalExpression.getConditionalExpressionCode()
+			if(someConditionalExpression != conditionalExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a FieldAccess.
+	*/
+	module::getFieldAccessCollectionCode(fieldAccesss : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		fieldAccesss->forEach(someFieldAccess:JAS.FieldAccess){
+			code += someFieldAccess.getFieldAccessCode()
+			if(someFieldAccess != fieldAccesss.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a InfixExpression.
+	*/
+	module::getInfixExpressionCollectionCode(infixExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		infixExpressions->forEach(someInfixExpression:JAS.InfixExpression){
+			code += someInfixExpression.getInfixExpressionCode()
+			if(someInfixExpression != infixExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a InstanceofExpression.
+	*/
+	module::getInstanceofExpressionCollectionCode(instanceofExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		instanceofExpressions->forEach(someInstanceofExpression:JAS.InstanceofExpression){
+			code += someInstanceofExpression.getInstanceofExpressionCode()
+			if(someInstanceofExpression != instanceofExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MethodInvocation.
+	*/
+	module::getMethodInvocationCollectionCode(methodInvocations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+		log("\n\nmodule::getMethodInvocationCollectionCode(methodInvocations : List, startingEmbrace : String, separator : String, endingEmbrace : String)\n\n")
+		var code : String =""
+		code += startingEmbrace
+		methodInvocations->forEach(someMethodInvocation:JAS.MethodInvocation){
+			code += someMethodInvocation.getMethodInvocationCode()
+			if(someMethodInvocation != methodInvocations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Name.
+	*/
+	module::getNameCollectionCode(names : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		names->forEach(someName:JAS.Name){
+			code += someName.getNameCode()
+			if(someName != names.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a NullLiteral.
+	*/
+	module::getNullLiteralCollectionCode(nullLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		nullLiterals->forEach(someNullLiteral:JAS.NullLiteral){
+			code += someNullLiteral.getNullLiteralCode()
+			if(someNullLiteral != nullLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a NumberLiteral.
+	*/
+	module::getNumberLiteralCollectionCode(numberLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		numberLiterals->forEach(someNumberLiteral:JAS.NumberLiteral){
+			code += someNumberLiteral.getNumberLiteralCode()
+			if(someNumberLiteral != numberLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ParenthesizedExpression.
+	*/
+	module::getParenthesizedExpressionCollectionCode(parenthesizedExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		parenthesizedExpressions->forEach(someParenthesizedExpression:JAS.ParenthesizedExpression){
+			code += someParenthesizedExpression.getParenthesizedExpressionCode()
+			if(someParenthesizedExpression != parenthesizedExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a PostfixExpression.
+	*/
+	module::getPostfixExpressionCollectionCode(postfixExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		postfixExpressions->forEach(somePostfixExpression:JAS.PostfixExpression){
+			code += somePostfixExpression.getPostfixExpressionCode()
+			if(somePostfixExpression != postfixExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a PrefixExpression.
+	*/
+	module::getPrefixExpressionCollectionCode(prefixExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		prefixExpressions->forEach(somePrefixExpression:JAS.PrefixExpression){
+			code += somePrefixExpression.getPrefixExpressionCode()
+			if(somePrefixExpression != prefixExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a StringLiteral.
+	*/
+	module::getStringLiteralCollectionCode(stringLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		stringLiterals->forEach(someStringLiteral:JAS.StringLiteral){
+			code += someStringLiteral.getStringLiteralCode()
+			if(someStringLiteral != stringLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SuperFieldAccess.
+	*/
+	module::getSuperFieldAccessCollectionCode(superFieldAccesss : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		superFieldAccesss->forEach(someSuperFieldAccess:JAS.SuperFieldAccess){
+			code += someSuperFieldAccess.getSuperFieldAccessCode()
+			if(someSuperFieldAccess != superFieldAccesss.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SuperMethodInvocation.
+	*/
+	module::getSuperMethodInvocationCollectionCode(superMethodInvocations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		superMethodInvocations->forEach(someSuperMethodInvocation:JAS.SuperMethodInvocation){
+			code += someSuperMethodInvocation.getSuperMethodInvocationCode()
+			if(someSuperMethodInvocation != superMethodInvocations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ThisExpression.
+	*/
+	module::getThisExpressionCollectionCode(thisExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		thisExpressions->forEach(someThisExpression:JAS.ThisExpression){
+			code += someThisExpression.getThisExpressionCode()
+			if(someThisExpression != thisExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a TypeLiteral.
+	*/
+	module::getTypeLiteralCollectionCode(typeLiterals : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		typeLiterals->forEach(someTypeLiteral:JAS.TypeLiteral){
+			code += someTypeLiteral.getTypeLiteralCode()
+			if(someTypeLiteral != typeLiterals.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a VariableDeclarationExpression.
+	*/
+	module::getVariableDeclarationExpressionCollectionCode(variableDeclarationExpressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		variableDeclarationExpressions->forEach(someVariableDeclarationExpression:JAS.VariableDeclarationExpression){
+			code += someVariableDeclarationExpression.getVariableDeclarationExpressionCode()
+			if(someVariableDeclarationExpression != variableDeclarationExpressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

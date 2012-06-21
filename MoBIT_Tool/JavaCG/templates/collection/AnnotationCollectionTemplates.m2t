@@ -1,0 +1,57 @@
+import "../../core/JavaCG.m2t"
+
+
+texttransformation AnnotationCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a MarkerAnnotation.
+	*/
+	module::getMarkerAnnotationCollectionCode(markerAnnotations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		markerAnnotations->forEach(someMarkerAnnotation:JAS.MarkerAnnotation){
+			code += someMarkerAnnotation.getMarkerAnnotationCode()
+			if(someMarkerAnnotation != markerAnnotations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a NormalAnnotation.
+	*/
+	module::getNormalAnnotationCollectionCode(normalAnnotations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		normalAnnotations->forEach(someNormalAnnotation:JAS.NormalAnnotation){
+			code += someNormalAnnotation.getNormalAnnotationCode()
+			if(someNormalAnnotation != normalAnnotations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SingleMemberAnnotation.
+	*/
+	module::getSingleMemberAnnotationCollectionCode(singleMemberAnnotations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		singleMemberAnnotations->forEach(someSingleMemberAnnotation:JAS.SingleMemberAnnotation){
+			code += someSingleMemberAnnotation.getSingleMemberAnnotationCode()
+			if(someSingleMemberAnnotation != singleMemberAnnotations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

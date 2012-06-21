@@ -1,0 +1,294 @@
+texttransformation ExpressionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a Annotation.
+	*/
+	module::annotationTemplate(resolveBoxing:String, resolveUnboxing:String, typeName:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Annotation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ArrayAccess.
+	*/
+	module::arrayAccessTemplate(resolveBoxing:String, resolveUnboxing:String, array:String, index:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ArrayAccess"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ArrayCreation.
+	*/
+	module::arrayCreationTemplate(resolveBoxing:String, resolveUnboxing:String, dimensions:String, initializer:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ArrayCreation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ArrayInitializer.
+	*/
+	module::arrayInitializerTemplate(resolveBoxing:String, resolveUnboxing:String, expressions:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ArrayInitializer"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Assignment.
+	*/
+	module::assignmentTemplate(resolveBoxing:String, resolveUnboxing:String, leftHandSide:String, operator:String, rightHandSide:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Assignment"
+
+	}
+
+
+	/*
+	* This rule defines a template for a BooleanLiteral.
+	*/
+	module::booleanLiteralTemplate(resolveBoxing:String, resolveUnboxing:String, booleanValue:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: BooleanLiteral"
+
+	}
+
+
+	/*
+	* This rule defines a template for a CastExpression.
+	*/
+	module::castExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, expression:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: CastExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a CharacterLiteral.
+	*/
+	module::characterLiteralTemplate(resolveBoxing:String, resolveUnboxing:String, charValue:String, escapedValue:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: CharacterLiteral"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ClassInstanceCreation.
+	*/
+	module::classInstanceCreationTemplate(resolveBoxing:String, resolveUnboxing:String, arguments:String, anonymousClassDeclaration:String, expression:String, type:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ClassInstanceCreation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ConditionalExpression.
+	*/
+	module::conditionalExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, elseExpression:String, expression:String, thenExpression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ConditionalExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a FieldAccess.
+	*/
+	module::fieldAccessTemplate(resolveBoxing:String, resolveUnboxing:String, expression:String, name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: FieldAccess"
+
+	}
+
+
+	/*
+	* This rule defines a template for a InfixExpression.
+	*/
+	module::infixExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, extendedOperands:String, leftOperand:String, operator:String, rightOperand:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: InfixExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a InstanceofExpression.
+	*/
+	module::instanceofExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, leftOperand:String, rightOperand:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: InstanceofExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MethodInvocation.
+	*/
+	module::methodInvocationTemplate(resolveBoxing:String, resolveUnboxing:String, arguments:String, expression:String, name:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MethodInvocation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Name.
+	*/
+	module::nameTemplate(resolveBoxing:String, resolveUnboxing:String, fullyQualifiedName:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Name"
+
+	}
+
+
+	/*
+	* This rule defines a template for a NullLiteral.
+	*/
+	module::nullLiteralTemplate(resolveBoxing:String, resolveUnboxing:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: NullLiteral"
+
+	}
+
+
+	/*
+	* This rule defines a template for a NumberLiteral.
+	*/
+	module::numberLiteralTemplate(resolveBoxing:String, resolveUnboxing:String, token:String){
+        var resolveBoxing: Boolean = params.get("resolveBoxing")
+        var resolveUnboxing: Boolean = params.get("resolveUnboxing")
+        var token: String = params.get("token")
+		result = token
+	}
+
+
+	/*
+	* This rule defines a template for a ParenthesizedExpression.
+	*/
+	module::parenthesizedExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, expression:String){
+
+        var resolveBoxing: Boolean = params.get("resolveBoxing")
+        var resolveUnboxing: Boolean = params.get("resolveUnboxing")
+        var expression : String  = params.get("expression")
+
+		// TODO code this template rule.
+
+		result = "(" + expression + ")"
+
+	}
+
+
+	/*
+	* This rule defines a template for a PostfixExpression.
+	*/
+	module::postfixExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, operand:String, operator:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: PostfixExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a PrefixExpression.
+	*/
+	module::prefixExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, operand:String, operator:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: PrefixExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a StringLiteral.
+	*/
+	module::stringLiteralTemplate(resolveBoxing:String, resolveUnboxing:String, escapedValue:String, literalValue:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: StringLiteral"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SuperFieldAccess.
+	*/
+	module::superFieldAccessTemplate(resolveBoxing:String, resolveUnboxing:String, name:String, qualifier:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SuperFieldAccess"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SuperMethodInvocation.
+	*/
+	module::superMethodInvocationTemplate(resolveBoxing:String, resolveUnboxing:String, arguments:String, name:String, qualifier:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SuperMethodInvocation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ThisExpression.
+	*/
+	module::thisExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, qualifier:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ThisExpression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TypeLiteral.
+	*/
+	module::typeLiteralTemplate(resolveBoxing:String, resolveUnboxing:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TypeLiteral"
+
+	}
+
+
+	/*
+	* This rule defines a template for a VariableDeclarationExpression.
+	*/
+	module::variableDeclarationExpressionTemplate(resolveBoxing:String, resolveUnboxing:String, fragments:String, modifiers:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: VariableDeclarationExpression"
+
+	}
+
+
+}

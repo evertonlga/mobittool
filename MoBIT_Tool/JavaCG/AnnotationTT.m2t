@@ -1,0 +1,76 @@
+import "util/Util_AnnotationTT.m2t"
+
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation AnnotationTT (in jast:"JavaAbstractSyntax") {
+  
+		    /**
+		 	* This rule returns the code of a Annotation.
+		 	*/
+		  	jast.Annotation::getAnnotationCode() : String {
+		  		if(self.oclIsTypeOf(jast.MarkerAnnotation)) result = self.getMarkerAnnotationCode()
+				else if(self.oclIsTypeOf(jast.NormalAnnotation)) result = self.getNormalAnnotationCode()
+				else if(self.oclIsTypeOf(jast.SingleMemberAnnotation)) result = self.getSingleMemberAnnotationCode()
+		
+			}
+
+      		/**
+ 			* This rule returns the code of a MarkerAnnotation.
+ 			*/
+      		jast.MarkerAnnotation::getMarkerAnnotationCode() : String {
+      			result = "MARKERANNOTATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a NormalAnnotation.
+ 			*/
+      		jast.NormalAnnotation::getNormalAnnotationCode() : String {
+      			result = "NORMALANNOTATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SingleMemberAnnotation.
+ 			*/
+      		jast.SingleMemberAnnotation::getSingleMemberAnnotationCode() : String {
+      			result = "SINGLEMEMBERANNOTATION NOT IMPLEMENTED YET..."
+    		}
+
+//************************* DELEGATION **************************
+	//belongs to Annotation
+			/**
+			* This rule delegates the role of returning the code of a MarkerAnnotation to another rule 
+			* called getMarkerAnnotationCode():String 
+			*/
+			jast.MarkerAnnotation::getAnnotationCode() : String {
+				result = self.getMarkerAnnotationCode()
+			}
+			
+			
+				//belongs to Annotation
+			/**
+			* This rule delegates the role of returning the code of a NormalAnnotation to another rule 
+			* called getNormalAnnotationCode():String 
+			*/
+			jast.NormalAnnotation::getAnnotationCode() : String {
+				result = self.getNormalAnnotationCode()
+			}
+			
+			
+				//belongs to Annotation
+			/**
+			* This rule delegates the role of returning the code of a SingleMemberAnnotation to another rule 
+			* called getSingleMemberAnnotationCode():String 
+			*/
+			jast.SingleMemberAnnotation::getAnnotationCode() : String {
+				result = self.getSingleMemberAnnotationCode()
+			}
+
+
+
+}

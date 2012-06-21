@@ -1,0 +1,86 @@
+import "collection/BodyDeclarationCollectionTemplates.m2t"
+
+texttransformation BodyDeclarationTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a AbstractTypeDeclaration.
+	*/
+	module::abstractTypeDeclarationTemplate(modifiers:String, javadoc:String, bodyDeclarations:String, name:String, localTypeDeclaration:String, memberTypeDeclaration:String, packageMemberTypeDeclaration:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AbstractTypeDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a AnnotationTypeMemberDeclaration.
+	*/
+	module::annotationTypeMemberDeclarationTemplate(modifiers:String, javadoc:String, default:String, name:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AnnotationTypeMemberDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a EnumConstantDeclaration.
+	*/
+	module::enumConstantDeclarationTemplate(modifiers:String, javadoc:String, arguments:String, anonymousClassDeclaration:String, name:String){
+        var modifiers: List = params.get("modifiers")
+        var modifiersCode : String = getExtendedModifierCollectionCode(modifiers, "BEGIN", "SEP", "END")
+
+        var javadoc : String  = params.get("javadoc")
+        var arguments: List = params.get("arguments")
+        var argumentsCode : String = getExpressionCollectionCode(arguments, "BEGIN", "SEP", "END")
+
+        var anonymousClassDeclaration : String  = params.get("anonymousClassDeclaration")
+        var name : String  = params.get("name")
+
+		// TODO code this template rule.
+		var code : String = ""
+		code += javadoc + ""
+		code += modifiersCode + ""
+		code += name + ""
+		code += argumentsCode + ""
+		code += anonymousClassDeclaration + ""
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a template for a FieldDeclaration.
+	*/
+	module::fieldDeclarationTemplate(modifiers:String, javadoc:String, fragments:String, type:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: FieldDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Initializer.
+	*/
+	module::initializerTemplate(modifiers:String, javadoc:String, body:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Initializer"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MethodDeclaration.
+	*/
+	module::methodDeclarationTemplate(modifiers:String, javadoc:String, body:String, extraDimensions:String, name:String, returnType:String, constructor:String, varargs:String, parameters:String, thrownExceptions:String, typeParameters:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MethodDeclaration"
+
+	}
+
+
+}

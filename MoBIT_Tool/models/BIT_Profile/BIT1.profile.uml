@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_15_1_bf70304_1221669926406_23715_478" name="BIT" metamodelReference="_0metamodelReferenceBIT">
+  <eAnnotations xmi:id="_0RQ7oYW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_0RQ7ooW9Ed2-DoLO-QzrwA" name="BIT" nsURI="http:///schemas/BIT/_0HR4coW9Ed2-DoLO-QzrwA/0" nsPrefix="BIT">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7o4W9Ed2-DoLO-QzrwA" name="Component" eSuperTypes="_0RQ7poW9Ed2-DoLO-QzrwA _0RQ7qYW9Ed2-DoLO-QzrwA">
+        <eAnnotations xmi:id="_0RQ7pIW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670110203_920493_547"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7pYW9Ed2-DoLO-QzrwA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7poW9Ed2-DoLO-QzrwA" name="_">
+        <eAnnotations xmi:id="_0RQ7p4W9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="uml:Stereotype" href="BIT.uml#_15_1_bf70304_1221670385218_575792_799"/>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7qIW9Ed2-DoLO-QzrwA" name="base_Element" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Element"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7qYW9Ed2-DoLO-QzrwA" name="_">
+        <eAnnotations xmi:id="_0RQ7qoW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="uml:Stereotype" href="BIT.uml#_15_1_bf70304_1221670396718_266280_848"/>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7q4W9Ed2-DoLO-QzrwA" name="__base_Element" ordered="false" lowerBound="1">
+          <eAnnotations xmi:id="_0RQ7rIW9Ed2-DoLO-QzrwA" source="redefines" references="_0RQ7qIW9Ed2-DoLO-QzrwA"/>
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Element"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7rYW9Ed2-DoLO-QzrwA" name="Context">
+        <eAnnotations xmi:id="_0RQ7roW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670169875_189311_575"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7r4W9Ed2-DoLO-QzrwA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7sIW9Ed2-DoLO-QzrwA" name="TestingComponent">
+        <eAnnotations xmi:id="_0RQ7sYW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670185921_475635_603"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7soW9Ed2-DoLO-QzrwA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7s4W9Ed2-DoLO-QzrwA" name="acquires">
+        <eAnnotations xmi:id="_0RQ7tIW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670222187_824043_631"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7tYW9Ed2-DoLO-QzrwA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7toW9Ed2-DoLO-QzrwA" name="creates">
+        <eAnnotations xmi:id="_0RQ7t4W9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670253015_833074_659"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7uIW9Ed2-DoLO-QzrwA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7uYW9Ed2-DoLO-QzrwA" name="testing">
+        <eAnnotations xmi:id="_0RQ7uoW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670268312_428307_687"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7u4W9Ed2-DoLO-QzrwA" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7vIW9Ed2-DoLO-QzrwA" name="stateCheking">
+        <eAnnotations xmi:id="_0RQ7vYW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670279921_297037_715"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7voW9Ed2-DoLO-QzrwA" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7v4W9Ed2-DoLO-QzrwA" name="stateSetting">
+        <eAnnotations xmi:id="_0RQ7wIW9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670305437_780028_743"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7wYW9Ed2-DoLO-QzrwA" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0RQ7woW9Ed2-DoLO-QzrwA" name="testingInterface">
+        <eAnnotations xmi:id="_0RQ7w4W9Ed2-DoLO-QzrwA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_15_1_bf70304_1221670316000_887938_771"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_0RQ7xIW9Ed2-DoLO-QzrwA" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <ownedComment xmi:id="_15_1_bf70304_1221675406265_4247_1570">
+    <body>Context Testing Component inv:
+	not (self.ownedOperation -> includes (op | op.name = 'setTester'))
+	      implies not (self.arbiter.oclIsUndefined())
+	and
+	self.ownedOperation -> includes (op | op.name = 'setTester'))
+	      implies self.arbiter.oclIsUndefined()</body>
+  </ownedComment>
+  <packageImport xmi:id="_15_1_bf70304_1221670652359_98435_1481">
+    <importedPackage href="BIT.uml#_15_1_bf70304_1221670634546_16078_1454"/>
+  </packageImport>
+  <packageImport xmi:id="_0metamodelReferenceBIT">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_0primitiveTypesBIT">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_0javaPrimitiveTypesBIT">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670110203_920493_547" name="Component">
+    <generalization xmi:id="_15_1_bf70304_1221670387500_278622_806" isSubstitutable="true">
+      <general xmi:type="uml:Stereotype" href="BIT.uml#_15_1_bf70304_1221670385218_575792_799"/>
+    </generalization>
+    <generalization xmi:id="_15_1_bf70304_1221670398437_883514_855" isSubstitutable="true">
+      <general xmi:type="uml:Stereotype" href="BIT.uml#_15_1_bf70304_1221670396718_266280_848"/>
+    </generalization>
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670404296_15660_902" name="base_Class" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670404296_161572_901"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670169875_189311_575" name="Context">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670572375_142062_987" name="base_Class" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670572375_573353_986"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670185921_475635_603" name="Testing Component">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670575375_99057_1046" name="base_Class" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670575375_725626_1045"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670222187_824043_631" name="acquires">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670587078_594690_1105" name="base_Association" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670587062_669605_1104"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670253015_833074_659" name="creates">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670590468_213687_1164" name="base_Association" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670590468_232967_1163"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670268312_428307_687" name="testing">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670593296_35294_1223" name="base_Operation" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670593296_157905_1222"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670279921_297037_715" name="stateCheking">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670596140_198990_1282" name="base_Operation" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670596140_316300_1281"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670305437_780028_743" name="stateSetting">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670599328_19475_1341" name="base_Operation" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670599328_344767_1340"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_15_1_bf70304_1221670316000_887938_771" name="testing Interface">
+    <ownedAttribute xmi:id="_15_1_bf70304_1221670602109_528023_1400" name="base_Operation" visibility="private">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+      <association xmi:type="uml:Extension" href="BIT.uml#_15_1_bf70304_1221670602109_990756_1399"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Profile>

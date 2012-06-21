@@ -1,0 +1,36 @@
+texttransformation CommentTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a BlockComment.
+	*/
+	module::blockCommentTemplate(alternateRoot:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: BlockComment"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Javadoc.
+	*/
+	module::javadocTemplate(alternateRoot:String, tags:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Javadoc"
+
+	}
+
+
+	/*
+	* This rule defines a template for a LineComment.
+	*/
+	module::lineCommentTemplate(alternateRoot:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: LineComment"
+
+	}
+
+
+}

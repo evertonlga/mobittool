@@ -1,0 +1,356 @@
+import "../../core/JavaCG.m2t"
+
+texttransformation ASTNodeCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	
+	module::getASTNodeCollectionCode(astNodes : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+		var code : String =""
+		code += startingEmbrace
+		astNodes->forEach(someAstNode:JAS.ASTNode){
+			code += someAstNode.getASTNodeCode()
+			if(someAstNode != astNodes.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+	
+	module::getExtendedModifierCollectionCode(extendedModifiers : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+		var code : String = ""
+		code += startingEmbrace
+		extendedModifiers->forEach(someExtendedModifier:JAS.ExtendedModifier){
+			code += someExtendedModifier.getExtendedModifierCode()
+			if(someExtendedModifier != extendedModifiers.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a AnonymousClassDeclaration.
+	*/
+	module::getAnonymousClassDeclarationCollectionCode(anonymousClassDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		anonymousClassDeclarations->forEach(someAnonymousClassDeclaration:JAS.AnonymousClassDeclaration){
+			code += someAnonymousClassDeclaration.getAnonymousClassDeclarationCode()
+			if(someAnonymousClassDeclaration != anonymousClassDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a BodyDeclaration.
+	*/
+	module::getBodyDeclarationCollectionCode(bodyDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		bodyDeclarations->forEach(someBodyDeclaration:JAS.BodyDeclaration){
+			code += someBodyDeclaration.getBodyDeclarationCode()
+			if(someBodyDeclaration != bodyDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a CatchClause.
+	*/
+	module::getCatchClauseCollectionCode(catchClauses : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		catchClauses->forEach(someCatchClause:JAS.CatchClause){
+			code += someCatchClause.getCatchClauseCode()
+			if(someCatchClause != catchClauses.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Comment.
+	*/
+	module::getCommentCollectionCode(comments : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		comments->forEach(someComment:JAS.Comment){
+			code += someComment.getCommentCode()
+			if(someComment != comments.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a CompilationUnit.
+	*/
+	module::getCompilationUnitCollectionCode(compilationUnits : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		compilationUnits->forEach(someCompilationUnit:JAS.CompilationUnit){
+			code += someCompilationUnit.getCompilationUnitCode()
+			if(someCompilationUnit != compilationUnits.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Expression.
+	*/
+	module::getExpressionCollectionCode(expressions : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		//log("expressions_size:" + expressions.size()+"\n")
+		//log("startingEmbrace:"+startingEmbrace+"\n")
+		//log("separator:"+separator+"\n")
+		//log("endingEmbrace:"+endingEmbrace+"\n")
+
+		var code : String = ""
+		code += startingEmbrace
+		expressions->forEach(someExpression:JAS.Expression){
+			code += someExpression.getExpressionCode()
+			if(someExpression != expressions.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ImportDeclaration.
+	*/
+	module::getImportDeclarationCollectionCode(importDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		importDeclarations->forEach(someImportDeclaration:JAS.ImportDeclaration){
+			code += someImportDeclaration.getImportDeclarationCode()
+			if(someImportDeclaration != importDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MemberRef.
+	*/
+	module::getMemberRefCollectionCode(memberRefs : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		memberRefs->forEach(someMemberRef:JAS.MemberRef){
+			code += someMemberRef.getMemberRefCode()
+			if(someMemberRef != memberRefs.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MemberValuePair.
+	*/
+	module::getMemberValuePairCollectionCode(memberValuePairs : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		memberValuePairs->forEach(someMemberValuePair:JAS.MemberValuePair){
+			code += someMemberValuePair.getMemberValuePairCode()
+			if(someMemberValuePair != memberValuePairs.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MethodRef.
+	*/
+	module::getMethodRefCollectionCode(methodRefs : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		methodRefs->forEach(someMethodRef:JAS.MethodRef){
+			code += someMethodRef.getMethodRefCode()
+			if(someMethodRef != methodRefs.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MethodRefParameter.
+	*/
+	module::getMethodRefParameterCollectionCode(methodRefParameters : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		methodRefParameters->forEach(someMethodRefParameter:JAS.MethodRefParameter){
+			code += someMethodRefParameter.getMethodRefParameterCode()
+			if(someMethodRefParameter != methodRefParameters.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Modifier.
+	*/
+	module::getModifierCollectionCode(modifiers : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		modifiers->forEach(someModifier:JAS.Modifier){
+			code += someModifier.getModifierCode()
+			if(someModifier != modifiers.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a PackageDeclaration.
+	*/
+	module::getPackageDeclarationCollectionCode(packageDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		packageDeclarations->forEach(somePackageDeclaration:JAS.PackageDeclaration){
+			code += somePackageDeclaration.getPackageDeclarationCode()
+			if(somePackageDeclaration != packageDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Statement.
+	*/
+	module::getStatementCollectionCode(statements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		statements->forEach(someStatement:JAS.Statement){
+			code += someStatement.getStatementCode()
+			if(someStatement != statements.last()) code += separator
+		}
+ 		code += endingEmbrace
+		result = code
+
+	}
+ 
+
+	/*
+	* This rule defines a generic template for a collection of a TagElement.
+	*/
+	module::getTagElementCollectionCode(tagElements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		tagElements->forEach(someTagElement:JAS.TagElement){
+			code += someTagElement.getTagElementCode()
+			if(someTagElement != tagElements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a TextElement.
+	*/
+	module::getTextElementCollectionCode(textElements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		textElements->forEach(someTextElement:JAS.TextElement){
+			code += someTextElement.getTextElementCode()
+			if(someTextElement != textElements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Type.
+	*/
+	module::getTypeCollectionCode(types : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		types->forEach(someType:JAS.Type){
+			code += someType.getTypeCode()
+			if(someType != types.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a TypeParameter.
+	*/
+	module::getTypeParameterCollectionCode(typeParameters : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		typeParameters->forEach(someTypeParameter:JAS.TypeParameter){
+			code += someTypeParameter.getTypeParameterCode()
+			if(someTypeParameter != typeParameters.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a VariableDeclaration.
+	*/
+	module::getVariableDeclarationCollectionCode(variableDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		variableDeclarations->forEach(someVariableDeclaration:JAS.VariableDeclaration){
+			code += someVariableDeclaration.getVariableDeclarationCode()
+			if(someVariableDeclaration != variableDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

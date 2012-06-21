@@ -1,0 +1,108 @@
+ 
+import "../../BodyDeclarationTT.m2t"
+
+texttransformation BodyDeclarationCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a AbstractTypeDeclaration.
+	*/
+	module::getAbstractTypeDeclarationCollectionCode(abstractTypeDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		abstractTypeDeclarations->forEach(someAbstractTypeDeclaration:JAS.AbstractTypeDeclaration){
+			code += someAbstractTypeDeclaration.getAbstractTypeDeclarationCode()
+			if(someAbstractTypeDeclaration != abstractTypeDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a AnnotationTypeMemberDeclaration.
+	*/
+	module::getAnnotationTypeMemberDeclarationCollectionCode(annotationTypeMemberDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		annotationTypeMemberDeclarations->forEach(someAnnotationTypeMemberDeclaration:JAS.AnnotationTypeMemberDeclaration){
+			code += someAnnotationTypeMemberDeclaration.getAnnotationTypeMemberDeclarationCode()
+			if(someAnnotationTypeMemberDeclaration != annotationTypeMemberDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a EnumConstantDeclaration.
+	*/
+	module::getEnumConstantDeclarationCollectionCode(enumConstantDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		enumConstantDeclarations->forEach(someEnumConstantDeclaration:JAS.EnumConstantDeclaration){
+			code += someEnumConstantDeclaration.getEnumConstantDeclarationCode()
+			if(someEnumConstantDeclaration != enumConstantDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a FieldDeclaration.
+	*/
+	module::getFieldDeclarationCollectionCode(fieldDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		fieldDeclarations->forEach(someFieldDeclaration:JAS.FieldDeclaration){
+			code += someFieldDeclaration.getFieldDeclarationCode()
+			if(someFieldDeclaration != fieldDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Initializer.
+	*/
+	module::getInitializerCollectionCode(initializers : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		initializers->forEach(someInitializer:JAS.Initializer){
+			code += someInitializer.getInitializerCode()
+			if(someInitializer != initializers.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a MethodDeclaration.
+	*/
+	module::getMethodDeclarationCollectionCode(methodDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		methodDeclarations->forEach(someMethodDeclaration:JAS.MethodDeclaration){
+			code += someMethodDeclaration.getMethodDeclarationCode()
+			if(someMethodDeclaration != methodDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+ 
+	}
+
+
+}

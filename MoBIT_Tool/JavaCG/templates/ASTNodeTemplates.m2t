@@ -1,0 +1,212 @@
+texttransformation ASTNodeTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a AnonymousClassDeclaration.
+	*/
+	module::anonymousClassDeclarationTemplate(bodyDeclarations:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AnonymousClassDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a BodyDeclaration.
+	*/
+	module::bodyDeclarationTemplate(modifiers:String, javadoc:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: BodyDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a CatchClause.
+	*/
+	module::catchClauseTemplate(body:String, exception:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: CatchClause"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Comment.
+	*/
+	module::commentTemplate(alternateRoot:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Comment"
+
+	}
+
+
+	/*
+	* This rule defines a template for a CompilationUnit.
+	*/
+	module::compilationUnitTemplate(comments:String, package:String, imports:String, types:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: CompilationUnit"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Expression.
+	*/
+	module::expressionTemplate(resolveBoxing:String, resolveUnboxing:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Expression"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ImportDeclaration.
+	*/
+	module::importDeclarationTemplate(onDemand:String, static:String, name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ImportDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MemberRef.
+	*/
+	module::memberRefTemplate(name:String, qualifier:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MemberRef"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MemberValuePair.
+	*/
+	module::memberValuePairTemplate(name:String, value:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MemberValuePair"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MethodRef.
+	*/
+	module::methodRefTemplate(name:String, qualifier:String, parameters:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MethodRef"
+
+	}
+
+
+	/*
+	* This rule defines a template for a MethodRefParameter.
+	*/
+	module::methodRefParameterTemplate(name:String, type:String, varargs:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: MethodRefParameter"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Modifier.
+	*/
+	module::modifierTemplate(abstract:String, final:String, native:String, none:String, private:String, protected:String, public:String, static:String, strictfp:String, synchronized:String, transient:String, volatile:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Modifier"
+
+	}
+
+
+	/*
+	* This rule defines a template for a PackageDeclaration.
+	*/
+	module::packageDeclarationTemplate(annotations:String, javadoc:String, name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: PackageDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Statement.
+	*/
+	module::statementTemplate(){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Statement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TagElement.
+	*/
+	module::tagElementTemplate(fragments:String, tagName:String, nested:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TagElement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TextElement.
+	*/
+	module::textElementTemplate(text:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TextElement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Type.
+	*/
+	module::typeTemplate(){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Type"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TypeParameter.
+	*/
+	module::typeParameterTemplate(name:String, typeBounds:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TypeParameter"
+
+	}
+
+
+	/*
+	* This rule defines a template for a VariableDeclaration.
+	*/
+	module::variableDeclarationTemplate(extraDimensions:String, initializer:String, name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: VariableDeclaration"
+
+	}
+
+
+}

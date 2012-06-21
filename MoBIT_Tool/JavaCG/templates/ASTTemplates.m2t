@@ -1,0 +1,14 @@
+texttransformation ASTTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a AST.
+	*/
+	module::aSTTemplate(root:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AST"
+
+	}
+
+
+}

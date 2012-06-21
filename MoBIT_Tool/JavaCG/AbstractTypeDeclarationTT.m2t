@@ -1,0 +1,106 @@
+import "/util/Util_AbstractTypeDeclarationTT.m2t"
+import "BodyDeclarationTT.m2t"
+import "ASTNodeTT.m2t"
+import "CommentTT.m2t"
+import "NameTT.m2t"
+import "TypeTT.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation AbstractTypeDeclarationTT (in jast:"JavaAbstractSyntax") {
+  
+  jast.AbstractTypeDeclaration::getAbstractTypeDeclarationCode() : String {
+    	log("getAbastractTypeDeclarationCode() called...")
+ 		if(self.oclIsTypeOf(jast.AnnotationTypeDeclaration)) result = self.getAnnotationTypeDeclarationCode()
+		else if(self.oclIsTypeOf(jast.EnumDeclaration)) result = self.getEnumDeclarationCode()
+		else if(self.oclIsTypeOf(jast.TypeDeclaration)) result = self.getTypeDeclarationCode()
+  }
+
+ 
+  
+      		/**
+ 			* This rule returns the code of a AnnotationTypeDeclaration.
+ 			*/
+      		jast.AnnotationTypeDeclaration::getAnnotationTypeDeclarationCode() : String {
+      			result = "ANNOTATIONTYPEDECLARATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a EnumDeclaration.
+ 			*/
+      		jast.EnumDeclaration::getEnumDeclarationCode() : String {
+      		  property s : String = " "//space
+      		  var javadoc : String = self.javadoc.getCommentCode() + s
+      		  var modifiers : String = getModifiers(self.modifiers) + s
+      		  var enum : String = "enum" + s
+      		  var enumName : String = self.name.getNameCode()+ s 
+      		  var typeParameters : String = getTypeParametersCode(self.typeParameters)+ s
+      		  var superInterfaceTypesDeclaration : String = getSuperInterfacesDeclarationCode(self.superInterfaceTypes)+ s
+      		  //var enumConstants : String = getEnumConstantsCode(self.enumConstants)
+      		  
+      		  var enumConstants : String =  getEnumConstantsCollectionCode(self.enumConstants)
+      		  
+      		  result += javadoc + modifiers + enum + enumName + typeParameters + superInterfaceTypesDeclaration
+      		  result += "{\n" + enumConstants + "\n}"
+      			//result = "ENUMDECLARATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a TypeDeclaration.
+ 			*/
+      		jast.TypeDeclaration::getTypeDeclarationCode() : String {
+      		  	log("getTypeDeclarationCode() called.")
+  			  	property s : String= " "//space
+		  	 	var javadoc : String = self.javadoc.getCommentCode()
+		  	 	var modifiers : String = getModifiers(self.modifiers)
+		  	 	var classORinterface : String = self.classORinterface()
+		  	 	var className : String = self.name.getNameCode()
+		  	 	var typeParameters : String = getTypeParametersCode(self.typeParameters)
+		  	 	var superClassTypeDeclaration : String = getSuperTypeDeclarationCode(self.superclassType)
+		  	 	var superInterfaceTypesDeclaration : String = getSuperInterfacesDeclarationCode(self.superInterfaceTypes)
+		  	 	var classAttributes: String =  getFieldDeclarationsCode(self.bodyDeclarations)
+		  	 	var classMethods : String = getMethodDeclarationsCode(self.bodyDeclarations)  	 	
+		  	 	result += javadoc + s 
+		  		result += modifiers + s + classORinterface + s + className 
+		  		result += typeParameters + s + superClassTypeDeclaration + s + superInterfaceTypesDeclaration
+		  	 	result += "{" + classAttributes + s + classMethods + "}"
+    		}
+
+//************************* DELEGATION ***************************
+
+	//belongs to AbstractTypeDeclaration
+/**
+* This rule delegates the role of returning the code of a AnnotationTypeDeclaration to another rule 
+* called getAnnotationTypeDeclarationCode():String 
+*/
+jast.AnnotationTypeDeclaration::getAbstractTypeDeclarationCode() : String {
+result = self.getAnnotationTypeDeclarationCode()
+}
+
+
+	//belongs to AbstractTypeDeclaration
+/**
+* This rule delegates the role of returning the code of a EnumDeclaration to another rule 
+* called getEnumDeclarationCode():String 
+*/
+jast.EnumDeclaration::getAbstractTypeDeclarationCode() : String {
+result = self.getEnumDeclarationCode()
+}
+
+
+	//belongs to AbstractTypeDeclaration
+/**
+* This rule delegates the role of returning the code of a TypeDeclaration to another rule 
+* called getTypeDeclarationCode():String 
+*/
+jast.TypeDeclaration::getAbstractTypeDeclarationCode() : String {
+result = self.getTypeDeclarationCode()
+}
+
+  
+}//textransformation

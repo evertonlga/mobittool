@@ -1,0 +1,257 @@
+import "collection/StatementCollectionTemplates.m2t"
+
+texttransformation StatementTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a AssertStatement.
+	*/
+	module::assertStatementTemplate(expression:String, message:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AssertStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Block.
+	*/
+	module::blockTemplate(statements:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Block"
+
+	}
+
+
+	/*
+	* This rule defines a template for a BreakStatement.
+	*/
+	module::breakStatementTemplate(label:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: BreakStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ConstructorInvocation.
+	*/
+	module::constructorInvocationTemplate(arguments:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ConstructorInvocation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ContinueStatement.
+	*/
+	module::continueStatementTemplate(label:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ContinueStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a DoStatement.
+	*/
+	module::doStatementTemplate(body:String, expression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: DoStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a EmptyStatement.
+	*/
+	module::emptyStatementTemplate(){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: EmptyStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a EnhancedForStatement.
+	*/
+	module::enhancedForStatementTemplate(body:String, expression:String, parameter:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: EnhancedForStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ExpressionStatement.
+	*/
+	module::expressionStatementTemplate(expression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ExpressionStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ForStatement.
+	*/
+	module::forStatementTemplate(body:String, expression:String, initializers:String, updaters:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ForStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a IfStatement.
+	*/
+	module::ifStatementTemplate(elseStatement:String, expression:String, thenStatement:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: IfStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a LabeledStatement.
+	*/
+	module::labeledStatementTemplate(body:String, label:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: LabeledStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ReturnStatement.
+	*/
+	module::returnStatementTemplate(expression:String){
+        var expression : String  = params.get("expression")
+
+		// TODO code this template rule.
+
+		result = "return " + expression
+
+	}
+
+
+	/*
+	* This rule defines a template for a SuperConstructorInvocation.
+	*/
+	module::superConstructorInvocationTemplate(arguments:String, expression:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SuperConstructorInvocation"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SwitchCase.
+	*/
+	module::switchCaseTemplate(expression:String, default:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SwitchCase"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SwitchStatement.
+	*/
+	module::switchStatementTemplate(expression:String, statements:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SwitchStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SynchronizedStatement.
+	*/
+	module::synchronizedStatementTemplate(body:String, expression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SynchronizedStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ThrowStatement.
+	*/
+	module::throwStatementTemplate(expression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ThrowStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TryStatement.
+	*/
+	module::tryStatementTemplate(catchClauses:String, body:String, finally:String){
+        var catchClauses: List = params.get("catchClauses")
+        var catchClausesCode : String = getCatchClauseCollectionCode(catchClauses, "", "", "")
+
+        var body : String  = params.get("body")
+        var finally : String  = params.get("finally")
+
+		// TODO code this template rule.
+		var code : String = ""
+		code += "try\n"
+		code += body
+		code += catchClausesCode
+		code += "finally\n"
+		code += finally
+		code += "\n\n"
+		result = code
+	}
+
+
+	/*
+	* This rule defines a template for a TypeDeclarationStatement.
+	*/
+	module::typeDeclarationStatementTemplate(declaration:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TypeDeclarationStatement"
+
+	}
+
+
+	/*
+	* This rule defines a template for a VariableDeclarationStatement.
+	*/
+	module::variableDeclarationStatementTemplate(fragments:String, modifiers:String, type:String){
+		result = modifiers  + " " + type  + " "+ fragments + ";"
+	}
+
+
+	/*
+	* This rule defines a template for a WhileStatement.
+	*/
+	module::whileStatementTemplate(body:String, expression:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: WhileStatement"
+
+	}
+
+
+}

@@ -1,0 +1,38 @@
+import "../../core/JavaCG.m2t"
+
+texttransformation VariableDeclarationCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a SingleVariableDeclaration.
+	*/
+	module::getSingleVariableDeclarationCollectionCode(singleVariableDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		singleVariableDeclarations->forEach(someSingleVariableDeclaration:JAS.SingleVariableDeclaration){
+			code += someSingleVariableDeclaration.getSingleVariableDeclarationCode()
+			if(someSingleVariableDeclaration != singleVariableDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a VariableDeclarationFragment.
+	*/
+	module::getVariableDeclarationFragmentCollectionCode(variableDeclarationFragments : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		variableDeclarationFragments->forEach(someVariableDeclarationFragment:JAS.VariableDeclarationFragment){
+			code += someVariableDeclarationFragment.getVariableDeclarationFragmentCode()
+			if(someVariableDeclarationFragment != variableDeclarationFragments.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+}

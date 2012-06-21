@@ -1,0 +1,36 @@
+texttransformation AbstractTypeDeclarationTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a AnnotationTypeDeclaration.
+	*/
+	module::annotationTypeDeclarationTemplate(modifiers:String, javadoc:String, bodyDeclarations:String, name:String, localTypeDeclaration:String, memberTypeDeclaration:String, packageMemberTypeDeclaration:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: AnnotationTypeDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a EnumDeclaration.
+	*/
+	module::enumDeclarationTemplate(modifiers:String, javadoc:String, bodyDeclarations:String, name:String, localTypeDeclaration:String, memberTypeDeclaration:String, packageMemberTypeDeclaration:String, superInterfaceTypes:String, enumConstants:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: EnumDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a TypeDeclaration.
+	*/
+	module::typeDeclarationTemplate(modifiers:String, javadoc:String, bodyDeclarations:String, name:String, localTypeDeclaration:String, memberTypeDeclaration:String, packageMemberTypeDeclaration:String, superclassType:String, interface:String, superInterfaceTypes:String, typeParameters:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: TypeDeclaration"
+
+	}
+
+
+}

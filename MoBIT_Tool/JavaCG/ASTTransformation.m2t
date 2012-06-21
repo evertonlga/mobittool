@@ -1,0 +1,9 @@
+import "ASTNodeTT.m2t"
+
+texttransformation ASTTransformation (in jast:"JavaAbstractSyntax") {
+  
+  jast.AST::getASTCode() : String {
+  	result = self.root.getASTNodeCode(); 
+  }
+  
+}//textransformation

@@ -1,0 +1,34 @@
+import "../BodyDeclarationTT.m2t"
+
+textmodule Util_BodyDeclarationTT (in jast:"JavaAbstractSyntax"){
+  
+			 /**
+			  *
+			  */
+			 module::getFieldDeclarationsCode(fdList : List) : String{
+			  	 	fdList->forEach(fd : jast.FieldDeclaration){
+						result += fd.getBodyDeclarationCode() +"\n";
+					}
+			 }
+			 
+			  /**
+			  *
+			  */
+			 module::getBodyDeclarationsCode(bdList : List) : String{
+			  	 	bdList->forEach(bd : jast.BodyDeclaration){
+						result += bd.getBodyDeclarationCode() +"\n";
+					}
+			 }
+			 
+			 
+			  /**
+			  *
+			  */
+			 module::getMethodDeclarationsCode(fdList : List) : String{
+			  	 	fdList->forEach(fd : jast.MethodDeclaration){
+						result += fd.getBodyDeclarationCode() +"\n";
+					}  	 
+			 }
+			 
+  
+}

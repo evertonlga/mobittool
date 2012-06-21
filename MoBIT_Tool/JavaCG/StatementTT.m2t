@@ -1,0 +1,478 @@
+import "util/Util_StatementTT.m2t"
+import "ExpressionTT.m2t"
+import "NameTT.m2t"
+import "TypeTT.m2t"
+import "ASTNodeTT.m2t"
+import "VariableDeclarationTT.m2t"
+import "templates/StatementTemplates.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation StatementTT (in jast:"JavaAbstractSyntax") {
+ 
+  jast.Statement::getStatementCode() : String {
+		if(self.oclIsTypeOf(jast.AssertStatement)) result = self.getAssertStatementCode()
+		else if(self.oclIsTypeOf(jast.Block)) result = self.getBlockCode()
+		else if(self.oclIsTypeOf(jast.BreakStatement)) result = self.getBreakStatementCode()
+		else if(self.oclIsTypeOf(jast.ConstructorInvocation)) result = self.getConstructorInvocationCode()
+		else if(self.oclIsTypeOf(jast.ContinueStatement)) result = self.getContinueStatementCode()
+		else if(self.oclIsTypeOf(jast.DoStatement)) result = self.getDoStatementCode()
+		else if(self.oclIsTypeOf(jast.EmptyStatement)) result = self.getEmptyStatementCode()
+		else if(self.oclIsTypeOf(jast.EnhancedForStatement)) result = self.getEnhancedForStatementCode()
+		else if(self.oclIsTypeOf(jast.ExpressionStatement)) result = self.getExpressionStatementCode()
+		else if(self.oclIsTypeOf(jast.ForStatement)) result = self.getForStatementCode()
+		else if(self.oclIsTypeOf(jast.IfStatement)) result = self.getIfStatementCode()
+		else if(self.oclIsTypeOf(jast.LabeledStatement)) result = self.getLabeledStatementCode()
+		else if(self.oclIsTypeOf(jast.ReturnStatement)) result = self.getReturnStatementCode()
+		else if(self.oclIsTypeOf(jast.SuperConstructorInvocation)) result = self.getSuperConstructorInvocationCode()
+		else if(self.oclIsTypeOf(jast.SwitchCase)) result = self.getSwitchCaseCode()
+		else if(self.oclIsTypeOf(jast.SwitchStatement)) result = self.getSwitchStatementCode()
+		else if(self.oclIsTypeOf(jast.SynchronizedStatement)) result = self.getSynchronizedStatementCode()
+		else if(self.oclIsTypeOf(jast.ThrowStatement)) result = self.getThrowStatementCode()
+		else if(self.oclIsTypeOf(jast.TryStatement)) result = self.getTryStatementCode()
+		else if(self.oclIsTypeOf(jast.TypeDeclarationStatement)) result = self.getTypeDeclarationStatementCode()
+		else if(self.oclIsTypeOf(jast.VariableDeclarationStatement)) result = self.getVariableDeclarationStatementCode()
+		else if(self.oclIsTypeOf(jast.WhileStatement)) result = self.getWhileStatementCode()
+  	 
+  }
+ 
+
+      		/**
+ 			* This rule returns the code of a AssertStatement.
+ 			*/
+      		jast.AssertStatement::getAssertStatementCode() : String {
+      			result = "ASSERTSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a Block.
+ 			*/
+      		jast.Block::getBlockCode() : String {
+				    self.statements->forEach(st : jast.Statement){
+				     	result += st.getStatementCode() + ";\n"
+				    }
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a BreakStatement.
+ 			*/
+      		jast.BreakStatement::getBreakStatementCode() : String {
+				result = "break " + self.label.getNameCode()
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ConstructorInvocation.
+ 			*/
+      		jast.ConstructorInvocation::getConstructorInvocationCode() : String {
+      			result = "CONSTRUCTORINVOCATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ContinueStatement.
+ 			*/
+      		jast.ContinueStatement::getContinueStatementCode() : String {
+      			result = "CONTINUESTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a DoStatement.
+ 			*/
+      		jast.DoStatement::getDoStatementCode() : String {
+      			result = "DOSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a EmptyStatement.
+ 			*/
+      		jast.EmptyStatement::getEmptyStatementCode() : String {
+      			result = "EMPTYSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a EnhancedForStatement.
+ 			*/
+      		jast.EnhancedForStatement::getEnhancedForStatementCode() : String {
+				    var _parameter : String = self.parameter.getVariableDeclarationCode()
+				    var expression : String
+				    if(self.expression.oclIsKindOf(jast.Name))
+				     	expression = self.expression.getNameCode()
+				    else if(self.oclIsKindOf(jast.Annotation))
+				    	expression = self.expression.getAnnotationCode()
+				    else
+				    	expression = self.expression.getExpressionCode()
+				    	
+					var body : String = self.body.getStatementCode()
+				 	result = "for(" + _parameter + " : " + expression + "){" + body + "}"
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ExpressionStatement.
+ 			*/
+      		jast.ExpressionStatement::getExpressionStatementCode() : String {
+    			result = self.expression.getExpressionCode()
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ForStatement.
+ 			*/
+      		jast.ForStatement::getForStatementCode() : String {
+      			result = "FORSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of an IfStatement.
+ 			*/
+      		jast.IfStatement::getIfStatementCode() : String {
+    			result += "if" + "(" + self.expression.getExpressionCode() + ")" + "{" + self.thenStatement.getStatementCode() + "\n}"
+    			if(self.elseStatement != null){
+    			 	result += "else{\n" + self.elseStatement.getStatementCode() + "\n}\n" 
+    			}else{
+    			  	result += "\n"
+    			}	
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a LabeledStatement.
+ 			*/
+      		jast.LabeledStatement::getLabeledStatementCode() : String {
+    			result = self.label.getNameCode() + ":" + self.body.getStatementCode()
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ReturnStatement.
+ 			*/
+      		jast.ReturnStatement::getReturnStatementCode() : String {
+		       var expression: String = self.expression.getExpressionCode()
+		
+		        var params : Hashtable = new Hashtable()
+		
+		        params.put( "expression", expression )
+		
+				result = returnStatementTemplate(params)
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SuperConstructorInvocation.
+ 			*/
+      		jast.SuperConstructorInvocation::getSuperConstructorInvocationCode() : String {
+      			result = "SUPERCONSTRUCTORINVOCATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SwitchCase.
+ 			*/
+      		jast.SwitchCase::getSwitchCaseCode() : String {
+      			result = "SWITCHCASE NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SwitchStatement.
+ 			*/
+      		jast.SwitchStatement::getSwitchStatementCode() : String {
+      			result = "SWITCHSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SynchronizedStatement.
+ 			*/
+      		jast.SynchronizedStatement::getSynchronizedStatementCode() : String {
+      			result = "SYNCHRONIZEDSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ThrowStatement.
+ 			*/
+      		jast.ThrowStatement::getThrowStatementCode() : String {
+      			result = "THROWSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a TryStatement.
+ 			*/
+      		jast.TryStatement::getTryStatementCode() : String {
+
+		        var catchClauses: List = self.catchClauses
+		        var body: String = self.body.getBlockCode()
+		        var finally: String = self.finally.getBlockCode()
+		
+		        var params : Hashtable = new Hashtable()
+		
+		        params.put( "catchClauses", catchClauses )
+		        params.put( "body", body )
+		        params.put( "finally", finally )
+		
+				result = tryStatementTemplate(params)
+
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a TypeDeclarationStatement.
+ 			*/
+      		jast.TypeDeclarationStatement::getTypeDeclarationStatementCode() : String {
+      			result = "TYPEDECLARATIONSTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a VariableDeclarationStatement.
+ 			*/
+      		jast.VariableDeclarationStatement::getVariableDeclarationStatementCode() : String {
+			    var modifiers: String = getModifiers(self.modifiers)
+			    var type : String = self.type.getTypeCode()
+			    var fragments : String = getVariableDeclarationFragmentsCode(self.fragments)
+			  	result = variableDeclarationStatementTemplate(modifiers, type, fragments)
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a WhileStatement.
+ 			*/
+      		jast.WhileStatement::getWhileStatementCode() : String {
+      			result = "WHILESTATEMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+//***************** DELEGATION *****************
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a AssertStatement to another rule 
+* called getAssertStatementCode():String 
+*/
+jast.AssertStatement::getStatementCode() : String {
+result = self.getAssertStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a Block to another rule 
+* called getBlockCode():String 
+*/
+jast.Block::getStatementCode() : String {
+result = self.getBlockCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a BreakStatement to another rule 
+* called getBreakStatementCode():String 
+*/
+jast.BreakStatement::getStatementCode() : String {
+result = self.getBreakStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ConstructorInvocation to another rule 
+* called getConstructorInvocationCode():String 
+*/
+jast.ConstructorInvocation::getStatementCode() : String {
+result = self.getConstructorInvocationCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ContinueStatement to another rule 
+* called getContinueStatementCode():String 
+*/
+jast.ContinueStatement::getStatementCode() : String {
+result = self.getContinueStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a DoStatement to another rule 
+* called getDoStatementCode():String 
+*/
+jast.DoStatement::getStatementCode() : String {
+result = self.getDoStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a EmptyStatement to another rule 
+* called getEmptyStatementCode():String 
+*/
+jast.EmptyStatement::getStatementCode() : String {
+result = self.getEmptyStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a EnhancedForStatement to another rule 
+* called getEnhancedForStatementCode():String 
+*/
+jast.EnhancedForStatement::getStatementCode() : String {
+result = self.getEnhancedForStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ExpressionStatement to another rule 
+* called getExpressionStatementCode():String 
+*/
+jast.ExpressionStatement::getStatementCode() : String {
+result = self.getExpressionStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ForStatement to another rule 
+* called getForStatementCode():String 
+*/
+jast.ForStatement::getStatementCode() : String {
+result = self.getForStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a IfStatement to another rule 
+* called getIfStatementCode():String 
+*/
+jast.IfStatement::getStatementCode() : String {
+result = self.getIfStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a LabeledStatement to another rule 
+* called getLabeledStatementCode():String 
+*/
+jast.LabeledStatement::getStatementCode() : String {
+result = self.getLabeledStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ReturnStatement to another rule 
+* called getReturnStatementCode():String 
+*/
+jast.ReturnStatement::getStatementCode() : String {
+result = self.getReturnStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a SuperConstructorInvocation to another rule 
+* called getSuperConstructorInvocationCode():String 
+*/
+jast.SuperConstructorInvocation::getStatementCode() : String {
+result = self.getSuperConstructorInvocationCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a SwitchCase to another rule 
+* called getSwitchCaseCode():String 
+*/
+jast.SwitchCase::getStatementCode() : String {
+result = self.getSwitchCaseCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a SwitchStatement to another rule 
+* called getSwitchStatementCode():String 
+*/
+jast.SwitchStatement::getStatementCode() : String {
+result = self.getSwitchStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a SynchronizedStatement to another rule 
+* called getSynchronizedStatementCode():String 
+*/
+jast.SynchronizedStatement::getStatementCode() : String {
+result = self.getSynchronizedStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a ThrowStatement to another rule 
+* called getThrowStatementCode():String 
+*/
+jast.ThrowStatement::getStatementCode() : String {
+result = self.getThrowStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a TryStatement to another rule 
+* called getTryStatementCode():String 
+*/
+jast.TryStatement::getStatementCode() : String {
+result = self.getTryStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a TypeDeclarationStatement to another rule 
+* called getTypeDeclarationStatementCode():String 
+*/
+jast.TypeDeclarationStatement::getStatementCode() : String {
+result = self.getTypeDeclarationStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a VariableDeclarationStatement to another rule 
+* called getVariableDeclarationStatementCode():String 
+*/
+jast.VariableDeclarationStatement::getStatementCode() : String {
+result = self.getVariableDeclarationStatementCode()
+}
+
+
+	//belongs to Statement
+/**
+* This rule delegates the role of returning the code of a WhileStatement to another rule 
+* called getWhileStatementCode():String 
+*/
+jast.WhileStatement::getStatementCode() : String {
+result = self.getWhileStatementCode()
+}
+
+  
+}//texttransformation

@@ -1,0 +1,25 @@
+texttransformation VariableDeclarationTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a SingleVariableDeclaration.
+	*/
+	module::singleVariableDeclarationTemplate(extraDimensions:String, initializer:String, name:String, type:String, varargs:String, modifiers:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SingleVariableDeclaration"
+
+	}
+
+
+	/*
+	* This rule defines a template for a VariableDeclarationFragment.
+	*/
+	module::variableDeclarationFragmentTemplate(extraDimensions:String, initializer:String, name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: VariableDeclarationFragment"
+
+	}
+
+
+}

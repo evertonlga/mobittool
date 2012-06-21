@@ -1,0 +1,28 @@
+import "../VariableDeclarationTT.m2t"
+import "../ExpressionTT.m2t"
+import "../NameTT.m2t"
+
+textmodule Util_VariableDeclarationTT (in jast:"JavaAbstractSyntax"){
+  
+  /**
+   *
+   */
+  module::getParametersCode(plist : List) : String{
+   	plist->forEach( param : jast.VariableDeclaration){
+   	  result += param.getVariableDeclarationCode()
+   	  if(plist.last() != param) result += ", "
+   	}
+    
+  }
+  
+  /**
+   *
+   */
+  module::getVariableDeclarationFragmentsCode(flist : List) : String{
+    flist->forEach(fragment : jast.VariableDeclarationFragment){
+		result += fragment.name.getNameCode() + " = "
+		result += fragment.initializer.getExpressionCode()
+    }
+  }
+  
+}//textmodule

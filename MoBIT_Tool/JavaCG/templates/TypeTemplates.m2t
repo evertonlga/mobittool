@@ -1,0 +1,69 @@
+texttransformation TypeTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a ArrayType.
+	*/
+	module::arrayTypeTemplate(componentType:String, dimensions:String, elementType:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ArrayType"
+
+	}
+
+
+	/*
+	* This rule defines a template for a ParameterizedType.
+	*/
+	module::parameterizedTypeTemplate(type:String, typeArguments:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: ParameterizedType"
+
+	}
+
+
+	/*
+	* This rule defines a template for a PrimitiveType.
+	*/
+	module::primitiveTypeTemplate(code:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: PrimitiveType"
+
+	}
+
+
+	/*
+	* This rule defines a template for a QualifiedType.
+	*/
+	module::qualifiedTypeTemplate(name:String, qualifier:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: QualifiedType"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SimpleType.
+	*/
+	module::simpleTypeTemplate(name:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SimpleType"
+
+	}
+
+
+	/*
+	* This rule defines a template for a WildcardType.
+	*/
+	module::wildcardTypeTemplate(bound:String, upperBound:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: WildcardType"
+
+	}
+
+
+}
