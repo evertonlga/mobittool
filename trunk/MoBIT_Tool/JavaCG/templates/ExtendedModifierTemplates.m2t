@@ -1,0 +1,25 @@
+texttransformation ExtendedModifierTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a Modifier.
+	*/
+	module::modifierTemplate(abstract:String, final:String, native:String, none:String, private:String, protected:String, public:String, static:String, strictfp:String, synchronized:String, transient:String, volatile:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Modifier"
+
+	}
+
+
+	/*
+	* This rule defines a template for a Annotation.
+	*/
+	module::annotationTemplate(resolveBoxing:String, resolveUnboxing:String, typeName:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: Annotation"
+
+	}
+
+
+}

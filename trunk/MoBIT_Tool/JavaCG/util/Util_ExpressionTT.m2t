@@ -1,0 +1,25 @@
+textmodule Util_ExpressionTT (in jast:"JavaAbstractSyntax"){
+		
+		module::getOperatorCode(operator : String) : String{
+		 	if(operator == "GREATER_EQUALS")result = ">=";
+		 	if(operator == "OR")result = "|";
+		 	if(operator == "RIGHT_SHIFT_SIGNED")result = ">>";
+		 	if(operator == "MINUS")result = "-";
+		 	if(operator == "XOR")result = "^";
+		 	if(operator == "LESS_EQUALS")result = "<=";
+		 	if(operator == "NOT_EQUALS")result = "!=";
+		 	if(operator == "AND")result = "&";
+		 	if(operator == "PLUS")result = "+";
+		 	if(operator == "GREATER")result = ">";
+		 	if(operator == "CONDITIONAL_OR")result = "||";
+		 	if(operator == "REMAINDER") result = "%";
+		 	if(operator == "LESS") result = "<";
+		 	if(operator == "LEFT_SHIFT") result = "<<";
+		 	if(operator == "RIGHT_SHIFT_UNSIGNED") result = ">>>";
+		 	if(operator == "CONDITIONAL_AND") result = "&&";
+		 	if(operator == "TIMES") result = "*";
+		 	if(operator == "DIVIDE") result = "/";
+		 	if(operator == "EQUALS")result = "==";
+		 	if(operator == "ASSIGN")result = "=";
+		}
+}

@@ -1,0 +1,627 @@
+import "AnnotationTT.m2t"
+import "NameTT.m2t"
+import "ASTNodeTT.m2t"
+import "TypeTT.m2t"
+import "util/Util_ExpressionTT.m2t"
+import "templates/ExpressionTemplates.m2t"
+
+
+texttransformation ExpressionTT (in jast:"JavaAbstractSyntax") {
+	
+	jast.Expression::getExpressionCode(){
+			 if(self.oclIsKindOf(jast.Annotation)) result = self.getAnnotationCode()
+		else if(self.oclIsTypeOf(jast.ArrayAccess)) result = self.getArrayAccessCode()
+		else if(self.oclIsTypeOf(jast.ArrayCreation)) result = self.getArrayCreationCode()
+		else if(self.oclIsTypeOf(jast.ArrayInitializer)) result = self.getArrayInitializerCode()
+		else if(self.oclIsTypeOf(jast.Assignment)) result = self.getAssignmentCode()
+		else if(self.oclIsTypeOf(jast.BooleanLiteral)) result = self.getBooleanLiteralCode()
+		else if(self.oclIsTypeOf(jast.CastExpression)) result = self.getCastExpressionCode()
+		else if(self.oclIsTypeOf(jast.CharacterLiteral)) result = self.getCharacterLiteralCode()
+		else if(self.oclIsTypeOf(jast.ClassInstanceCreation)) result = self.getClassInstanceCreationCode()
+		else if(self.oclIsTypeOf(jast.ConditionalExpression)) result = self.getConditionalExpressionCode()
+		else if(self.oclIsTypeOf(jast.FieldAccess)) result = self.getFieldAccessCode()
+		else if(self.oclIsTypeOf(jast.InfixExpression)) result = self.getInfixExpressionCode()
+		else if(self.oclIsTypeOf(jast.InstanceofExpression)) result = self.getInstanceofExpressionCode()
+		else if(self.oclIsTypeOf(jast.MethodInvocation)) result = self.getMethodInvocationCode()
+		else if(self.oclIsKindOf(jast.Name)) result = self.getNameCode()
+		else if(self.oclIsTypeOf(jast.NullLiteral)) result = self.getNullLiteralCode()
+		else if(self.oclIsTypeOf(jast.NumberLiteral)) result = self.getNumberLiteralCode()
+		else if(self.oclIsTypeOf(jast.ParenthesizedExpression)) result = self.getParenthesizedExpressionCode()
+		else if(self.oclIsTypeOf(jast.PostfixExpression)) result = self.getPostfixExpressionCode()
+		else if(self.oclIsTypeOf(jast.PrefixExpression)) result = self.getPrefixExpressionCode()
+		else if(self.oclIsTypeOf(jast.StringLiteral)) result = self.getStringLiteralCode()
+		else if(self.oclIsTypeOf(jast.SuperFieldAccess)) result = self.getSuperFieldAccessCode()
+		else if(self.oclIsTypeOf(jast.SuperMethodInvocation)) result = self.getSuperMethodInvocationCode()
+		else if(self.oclIsTypeOf(jast.ThisExpression)) result = self.getThisExpressionCode()
+		else if(self.oclIsTypeOf(jast.TypeLiteral)) result = self.getTypeLiteralCode()
+		else if(self.oclIsTypeOf(jast.VariableDeclarationExpression)) result = self.getVariableDeclarationExpressionCode()
+
+	  
+	}
+	 
+	 //COMPLEMENTS BEGIN
+	 	jast.MethodInvocation::getExpressionCode(){
+	 	 	result = self.getMethodInvocationCode() 
+	 	}
+	 
+
+	 //COMPLEMENTS END
+	 
+ 
+    // ****** SPECIFICS *****
+
+      		/**
+ 			* This rule returns the code of a ArrayAccess.
+ 			*/
+      		jast.ArrayAccess::getArrayAccessCode() : String {
+      			result = "ARRAYACCESS NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a ArrayCreation.
+ 			*/
+      		jast.ArrayCreation::getArrayCreationCode() : String {
+      			result = "ARRAYCREATION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a ArrayInitializer.
+ 			*/
+      		jast.ArrayInitializer::getArrayInitializerCode() : String {
+      		  result += "{"
+      		  self.expressions->forEach(e : jast.Expression){
+      		  	result += e.getExpressionCode()
+      		  	if(not (e == self.expressions.last())) result+= ", "
+      		  }
+      		  result += "}"
+    		}
+
+
+
+      		/**
+ 			* This rule returns the code of a Assignment.
+ 			*/
+      		jast.Assignment::getAssignmentCode() : String {
+      			property s = " "
+	 			var leftHandSide : String = self.leftHandSide.getExpressionCode()
+	  			var operator : String = getOperatorCode(self.operator)
+	  			var rightHandSide : String = self.rightHandSide.getExpressionCode()
+	 			result = leftHandSide + s + operator + s + rightHandSide
+    		}
+
+
+
+
+      		/**
+ 			* This rule returns the code of a BooleanLiteral.
+ 			*/
+      		jast.BooleanLiteral::getBooleanLiteralCode() : String {
+ 			  if(self.booleanValue == true){
+	    		result =  "true"
+	  		}else{
+	    		result = "false"
+	  			}
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a CastExpression.
+ 			*/
+      		jast.CastExpression::getCastExpressionCode() : String {
+      			result = "CASTEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a CharacterLiteral.
+ 			*/
+      		jast.CharacterLiteral::getCharacterLiteralCode() : String {
+      			result = "CHARACTERLITERAL NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ClassInstanceCreation.
+ 			*/
+      		jast.ClassInstanceCreation::getClassInstanceCreationCode() : String {
+				  var type : String = self.type.getTypeCode()
+				  var typeArguments : String = getTypeParametersCode(self.typeArguments)
+				  var arguments : String = getArguments(self.arguments)
+				  var annonymousClassInstantiation : String = self.anonymousClassDeclaration.getASTNodeCode()
+			  	  result = "new " + type + typeArguments + "(" + arguments + ")" + annonymousClassInstantiation + ";"
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a ConditionalExpression.
+ 			*/
+      		jast.ConditionalExpression::getConditionalExpressionCode() : String {
+      			result = "CONDITIONALEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a FieldAccess.
+ 			*/
+      		jast.FieldAccess::getFieldAccessCode() : String {
+      			result = "FIELDACCESS NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a InfixExpression.
+ 			*/
+      		jast.InfixExpression::getInfixExpressionCode() : String {
+      		  	result += self.leftOperand.getExpressionCode()
+      		  	result += " " + self.getOperatorCode(self.operator) + " " 
+      		  	result += self.rightOperand.getExpressionCode()
+      			//result = "INFIXEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a InstanceofExpression.
+ 			*/
+      		jast.InstanceofExpression::getInstanceofExpressionCode() : String {
+      			result = "INSTANCEOFEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a MethodInvocation.
+ 			*/
+      		jast.MethodInvocation::getMethodInvocationCode() : String {
+			 	  var dot : String = "."
+				  var expression : String = ""
+				  if(self.expression.oclIsTypeOf(jast.NullLiteral)){
+				  	dot = ""
+				  	expression = ""
+				  }else{
+				   expression  = self.expression.getExpressionCode()
+				  }
+				  
+				  var name : String = self.name.getNameCode()
+				  var typeArguments : String = getTypeParametersCode(self.typeArguments)
+			
+				  var args : String = getArguments(self.arguments)
+			  	  result = expression + dot + name + typeArguments + "(" + args + ")"
+    		}
+
+
+	//belongs to Expression
+
+
+      		/**
+ 			* This rule returns the code of a NullLiteral.
+ 			*/
+      		jast.NullLiteral::getNullLiteralCode() : String {
+      			 result = "null"
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a NumberLiteral.
+ 			*/
+      		jast.NumberLiteral::getNumberLiteralCode() : String {
+		        var resolveBoxing: Boolean = self.resolveBoxing
+		        var resolveUnboxing: Boolean = self.resolveUnboxing
+		        var token: String = self.token
+		
+		        var params : Hashtable = new Hashtable()
+		
+		        params.put( "resolveBoxing", resolveBoxing )
+		        params.put( "resolveUnboxing", resolveUnboxing )
+		        params.put( "token", token )
+		
+				result = numberLiteralTemplate(params)
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a ParenthesizedExpression.
+ 			*/
+      		jast.ParenthesizedExpression::getParenthesizedExpressionCode() : String {
+			        var resolveBoxing: Boolean = self.resolveBoxing
+			        var resolveUnboxing: Boolean = self.resolveUnboxing
+			        var expression: String = self.expression.getExpressionCode()
+			
+			        var params : Hashtable = new Hashtable()
+			
+			        params.put( "resolveBoxing", resolveBoxing )
+			        params.put( "resolveUnboxing", resolveUnboxing )
+			        params.put( "expression", expression )
+			
+					result = parenthesizedExpressionTemplate(params)
+
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a PostfixExpression.
+ 			*/
+      		jast.PostfixExpression::getPostfixExpressionCode() : String {
+      			result = "POSTFIXEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a PrefixExpression.
+ 			*/
+      		jast.PrefixExpression::getPrefixExpressionCode() : String {
+      			result = "PREFIXEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a StringLiteral.
+ 			*/
+      		jast.StringLiteral::getStringLiteralCode() : String {
+      			 result = "\"" + self.escapedValue + "\""
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a SuperFieldAccess.
+ 			*/
+      		jast.SuperFieldAccess::getSuperFieldAccessCode() : String {
+      			result = "SUPERFIELDACCESS NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a SuperMethodInvocation.
+ 			*/
+      		jast.SuperMethodInvocation::getSuperMethodInvocationCode() : String {
+      		   	 				  var expression : String = "super."
+				  
+				  var name : String = self.name.getNameCode()
+				  var typeArguments : String = getTypeParametersCode(self.typeArguments)
+			
+				  var args : String = getArguments(self.arguments)
+			  	  result =  expression + name + typeArguments + "(" + args + ")"
+      		//	result = "SUPERMETHODINVOCATION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a ThisExpression.
+ 			*/
+      		jast.ThisExpression::getThisExpressionCode() : String {
+      			result = "THISEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a TypeLiteral.
+ 			*/
+      		jast.TypeLiteral::getTypeLiteralCode() : String {
+      			result = "TYPELITERAL NOT IMPLEMENTED YET..."
+    		}
+
+
+	//belongs to Expression
+
+      		/**
+ 			* This rule returns the code of a VariableDeclarationExpression.
+ 			*/
+      		jast.VariableDeclarationExpression::getVariableDeclarationExpressionCode() : String {
+      			result = "VARIABLEDECLARATIONEXPRESSION NOT IMPLEMENTED YET..."
+    		}
+    
+    // ************************ DELEGATION **********************
+	//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a Annotation to another rule 
+			* called getAnnotationCode():String 
+			*/
+			jast.Annotation::getExpressionCode() : String {
+				result = self.getAnnotationCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ArrayAccess to another rule 
+			* called getArrayAccessCode():String 
+			*/
+			jast.ArrayAccess::getExpressionCode() : String {
+				result = self.getArrayAccessCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ArrayCreation to another rule 
+			* called getArrayCreationCode():String 
+			*/
+			jast.ArrayCreation::getExpressionCode() : String {
+				result = self.getArrayCreationCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ArrayInitializer to another rule 
+			* called getArrayInitializerCode():String 
+			*/
+			jast.ArrayInitializer::getExpressionCode() : String {
+				result = self.getArrayInitializerCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a Assignment to another rule 
+			* called getAssignmentCode():String 
+			*/
+			jast.Assignment::getExpressionCode() : String {
+				result = self.getAssignmentCode()
+			}
+			
+			
+			
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a BooleanLiteral to another rule 
+			* called getBooleanLiteralCode():String 
+			*/
+			jast.BooleanLiteral::getExpressionCode() : String {
+				result = self.getBooleanLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a CastExpression to another rule 
+			* called getCastExpressionCode():String 
+			*/
+			jast.CastExpression::getExpressionCode() : String {
+				result = self.getCastExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a CharacterLiteral to another rule 
+			* called getCharacterLiteralCode():String 
+			*/
+			jast.CharacterLiteral::getExpressionCode() : String {
+			result = self.getCharacterLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ClassInstanceCreation to another rule 
+			* called getClassInstanceCreationCode():String 
+			*/
+			jast.ClassInstanceCreation::getExpressionCode() : String {
+				result = self.getClassInstanceCreationCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ConditionalExpression to another rule 
+			* called getConditionalExpressionCode():String 
+			*/
+			jast.ConditionalExpression::getExpressionCode() : String {
+				result = self.getConditionalExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a FieldAccess to another rule 
+			* called getFieldAccessCode():String 
+			*/
+			jast.FieldAccess::getExpressionCode() : String {
+			result = self.getFieldAccessCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a InfixExpression to another rule 
+			* called getInfixExpressionCode():String 
+			*/
+			jast.InfixExpression::getExpressionCode() : String {
+				result = self.getInfixExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a InstanceofExpression to another rule 
+			* called getInstanceofExpressionCode():String 
+			*/
+			jast.InstanceofExpression::getExpressionCode() : String {
+			result = self.getInstanceofExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a MethodInvocation to another rule 
+			* called getMethodInvocationCode():String 
+			*/
+			jast.MethodInvocation::getExpressionCode() : String {
+				result = self.getMethodInvocationCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a Name to another rule 
+			* called getNameCode():String 
+			*/
+			jast.Name::getExpressionCode() : String {
+				result = self.getNameCode()
+			}
+//*************************************************************************************************************
+			jast.SimpleName::getExpressionCode() : String {
+				result = self.getNameCode()
+			}
+			jast.QualifiedName::getExpressionCode() : String {
+				result = self.getNameCode()
+			}
+			//GAMBIARRA...
+//*************************************************************************************************************						
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a NullLiteral to another rule 
+			* called getNullLiteralCode():String 
+			*/
+			jast.NullLiteral::getExpressionCode() : String {
+			result = self.getNullLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a NumberLiteral to another rule 
+			* called getNumberLiteralCode():String 
+			*/
+			jast.NumberLiteral::getExpressionCode() : String {
+				result = self.getNumberLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ParenthesizedExpression to another rule 
+			* called getParenthesizedExpressionCode():String 
+			*/
+			jast.ParenthesizedExpression::getExpressionCode() : String {
+			result = self.getParenthesizedExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a PostfixExpression to another rule 
+			* called getPostfixExpressionCode():String 
+			*/
+			jast.PostfixExpression::getExpressionCode() : String {
+				result = self.getPostfixExpressionCode()
+			}
+			
+			
+			
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a PrefixExpression to another rule 
+			* called getPrefixExpressionCode():String 
+			*/
+			jast.PrefixExpression::getExpressionCode() : String {
+				result = self.getPrefixExpressionCode()
+			}
+			
+			
+			
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a StringLiteral to another rule 
+			* called getStringLiteralCode():String 
+			*/
+			jast.StringLiteral::getExpressionCode() : String {
+				result = self.getStringLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a SuperFieldAccess to another rule 
+			* called getSuperFieldAccessCode():String 
+			*/
+			jast.SuperFieldAccess::getExpressionCode() : String {
+				result = self.getSuperFieldAccessCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a SuperMethodInvocation to another rule 
+			* called getSuperMethodInvocationCode():String 
+			*/
+			jast.SuperMethodInvocation::getExpressionCode() : String {
+			result = self.getSuperMethodInvocationCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a ThisExpression to another rule 
+			* called getThisExpressionCode():String 
+			*/
+			jast.ThisExpression::getExpressionCode() : String {
+				result = self.getThisExpressionCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a TypeLiteral to another rule 
+			* called getTypeLiteralCode():String 
+			*/
+			jast.TypeLiteral::getExpressionCode() : String {
+				result = self.getTypeLiteralCode()
+			}
+			
+			
+				//belongs to Expression
+			/**
+			* This rule delegates the role of returning the code of a VariableDeclarationExpression to another rule 
+			* called getVariableDeclarationExpressionCode():String 
+			*/
+			jast.VariableDeclarationExpression::getExpressionCode() : String {
+				result = self.getVariableDeclarationExpressionCode()
+			}
+			
+			    
+}//textransformation

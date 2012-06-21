@@ -1,0 +1,162 @@
+import "util/Util_BodyDeclarationTT.m2t"
+import "NameTT.m2t"
+import "AbstractTypeDeclarationTT.m2t"
+import "ASTNodeTT.m2t"
+import "TypeTT.m2t"
+import "VariableDeclarationTT.m2t"
+import "StatementTT.m2t"
+import "util/Util_ASTNodeTT.m2t"
+import "util/Util_VariableDeclarationTT.m2t"
+import "CommentTT.m2t"
+import "templates/BodyDeclarationTemplates.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation BodyDeclarationTT (in jast:"JavaAbstractSyntax") {
+ 
+  jast.BodyDeclaration::getBodyDeclarationCode() : String {
+	    if(self.oclIsKindOf(jast.AbstractTypeDeclaration)) result = self.getAbstractTypeDeclarationCode()
+		else if(self.oclIsTypeOf(jast.AnnotationTypeMemberDeclaration)) result = self.getAnnotationTypeMemberDeclarationCode()
+		else if(self.oclIsTypeOf(jast.EnumConstantDeclaration)) result = self.getEnumConstantDeclarationCode()
+		else if(self.oclIsTypeOf(jast.FieldDeclaration)) result = self.getFieldDeclarationCode()
+		else if(self.oclIsTypeOf(jast.Initializer)) result = self.getInitializerCode()
+		else if(self.oclIsTypeOf(jast.MethodDeclaration)) result = self.getMethodDeclarationCode()
+  }
+  
+
+      		/**
+ 			* This rule returns the code of a AnnotationTypeMemberDeclaration.
+ 			*/
+      		jast.AnnotationTypeMemberDeclaration::getAnnotationTypeMemberDeclarationCode() : String {
+      			result = "ANNOTATIONTYPEMEMBERDECLARATION NOT IMPLEMENTED YET..."
+    		}
+
+      		/**
+ 			* This rule returns the code of a EnumConstantDeclaration.
+ 			*/
+      		jast.EnumConstantDeclaration::getEnumConstantDeclarationCode() : String {
+      		          var modifiers: List = self.modifiers
+				        var javadoc: String = self.javadocgetJavadocCode()
+				        var arguments: List = self.arguments
+				        var anonymousClassDeclaration: String = self.anonymousClassDeclaration.getAnonymousClassDeclarationCode()
+				        var name: String = self.name.getSimpleNameCode()
+				
+				        var params : Hashtable = new Hashtable()
+				
+				        params.put( "modifiers", modifiers )
+				        params.put( "javadoc", javadoc )
+				        params.put( "arguments", arguments )
+				        params.put( "anonymousClassDeclaration", anonymousClassDeclaration )
+				        params.put( "name", name )
+				
+						result = enumConstantDeclarationTemplate(params)
+
+    		}
+
+      		/**
+ 			* This rule returns the code of a FieldDeclaration.
+ 			*/
+      		jast.FieldDeclaration::getFieldDeclarationCode() : String {
+					property s : String = " " //space
+					var modifiers : String = getModifiers(self.modifiers)
+					var type : String = self.type.getTypeCode()
+					var frag: String = getVariableDeclarationFragmentsCode(self.fragments)
+					//var variableDeclaration : String = self.getVariableDeclarationCode()
+					result = modifiers + s + type + s + frag + ";"
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a Initializer.
+ 			*/
+      		jast.Initializer::getInitializerCode() : String {
+      			result = "INITIALIZER NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a MethodDeclaration.
+ 			*/
+      		jast.MethodDeclaration::getMethodDeclarationCode() : String {
+			     //EXTRA DIMENSIONS?!?!
+			    property s : String = " "
+			    var javadoc : String = self.javadoc.getCommentCode()
+			    var modifiers : String = getModifiers(self.modifiers)
+			    var returnType : String = self.returnType.getTypeCode()
+			    var typeParameters : String = getTypeParametersCode(self.typeParameters)
+			    var methodName : String = self.name.getNameCode()
+			    var parameters : String = getParametersCode( self.parameters )
+			    var throwsDeclaration : String = getThrownExceptions(self.thrownExceptions)
+			    var methodBody : String = self.body.getStatementCode()
+			  	  	
+			 
+			  	result += javadoc + s + modifiers + s + returnType + s + methodName + s 
+			  	result += "(" + parameters + ")" + throwsDeclaration + "{" + methodBody + "}"
+    		}
+
+//**************** DELEGATION ******************
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a AbstractTypeDeclaration to another rule 
+* called getAbstractTypeDeclarationCode():String 
+*/
+jast.AbstractTypeDeclaration::getBodyDeclarationCode() : String {
+result = self.getAbstractTypeDeclarationCode()
+}
+
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a AnnotationTypeMemberDeclaration to another rule 
+* called getAnnotationTypeMemberDeclarationCode():String 
+*/
+jast.AnnotationTypeMemberDeclaration::getBodyDeclarationCode() : String {
+result = self.getAnnotationTypeMemberDeclarationCode()
+}
+
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a EnumConstantDeclaration to another rule 
+* called getEnumConstantDeclarationCode():String 
+*/
+jast.EnumConstantDeclaration::getBodyDeclarationCode() : String {
+result = self.getEnumConstantDeclarationCode()
+}
+
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a FieldDeclaration to another rule 
+* called getFieldDeclarationCode():String 
+*/
+jast.FieldDeclaration::getBodyDeclarationCode() : String {
+result = self.getFieldDeclarationCode()
+}
+
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a Initializer to another rule 
+* called getInitializerCode():String 
+*/
+jast.Initializer::getBodyDeclarationCode() : String {
+result = self.getInitializerCode()
+}
+
+
+	//belongs to BodyDeclaration
+/**
+* This rule delegates the role of returning the code of a MethodDeclaration to another rule 
+* called getMethodDeclarationCode():String 
+*/
+jast.MethodDeclaration::getBodyDeclarationCode() : String {
+result = self.getMethodDeclarationCode()
+}
+
+   
+}//textransformation

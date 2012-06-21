@@ -1,0 +1,380 @@
+import "util/Util_ASTNodeTT.m2t"
+
+import "BodyDeclarationTT.m2t"
+import "CommentTT.m2t"
+import "ExpressionTT.m2t"
+import "StatementTT.m2t"
+import "TypeTT.m2t"
+import "VariableDeclarationTT.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+
+ 
+
+texttransformation ASTNodeTT (in jast:"JavaAbstractSyntax") { 
+ 
+  jast.ASTNode::getASTNodeCode() : String {
+    	log("choice rule of ASTNode called")
+  	    if(self.oclIsTypeOf(jast.AnonymousClassDeclaration)) result = self.getAnonymousClassDeclarationCode()
+		else if(self.oclIsKindOf(jast.BodyDeclaration)) result = self.getBodyDeclarationCode()
+		else if(self.oclIsTypeOf(jast.CatchClause)) result = self.getCatchClauseCode()
+		else if(self.oclIsKindOf(jast.Comment)) result = self.getCommentCode()
+		else if(self.oclIsTypeOf(jast.CompilationUnit)) result = self.getCompilationUnitCode()
+		else if(self.oclIsKindOf(jast.Expression)) result = self.getExpressionCode()
+		else if(self.oclIsTypeOf(jast.ImportDeclaration)) result = self.getImportDeclarationCode()
+		else if(self.oclIsTypeOf(jast.MemberRef)) result = self.getMemberRefCode()
+		else if(self.oclIsTypeOf(jast.MemberValuePair)) result = self.getMemberValuePairCode()
+		else if(self.oclIsTypeOf(jast.MethodRef)) result = self.getMethodRefCode()
+		else if(self.oclIsTypeOf(jast.MethodRefParameter)) result = self.getMethodRefParameterCode()
+		else if(self.oclIsTypeOf(jast.ExtendedModifier)) result = self.getExtendedModifierCode()
+		else if(self.oclIsTypeOf(jast.Modifier)) result = self.getModifierCode()
+		else if(self.oclIsTypeOf(jast.PackageDeclaration)) result = self.getPackageDeclarationCode()
+		else if(self.oclIsKindOf(jast.Statement)) result = self.getStatementCode()
+		else if(self.oclIsTypeOf(jast.TagElement)) result = self.getTagElementCode()
+		else if(self.oclIsTypeOf(jast.TextElement)) result = self.getTextElementCode()
+		else if(self.oclIsKindOf(jast.Type)) result = self.getTypeCode()
+		else if(self.oclIsTypeOf(jast.TypeParameter)) result = self.getTypeParameterCode()
+		else if(self.oclIsKindOf(jast.VariableDeclaration)) result = self.getVariableDeclarationCode()
+  }
+ 
+ 
+ 
+      		/**
+ 			* This rule returns the code of a AnonymousClassDeclaration.
+ 			*/
+      		jast.AnonymousClassDeclaration::getAnonymousClassDeclarationCode() : String {
+      			    if(self.bodyDeclarations.isEmpty()) result = "" 
+    				else result = "{" + getBodyDeclarationsCode(self.bodyDeclarations) + "}"
+
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a CatchClause.
+ 			*/
+      		jast.CatchClause::getCatchClauseCode() : String {
+      			result = "CATCHCLAUSE NOT IMPLEMENTED YET..."
+    		}
+
+
+
+      		/**
+ 			* This rule returns the code of a CompilationUnit.
+ 			*/
+      		jast.CompilationUnit::getCompilationUnitCode() : String {
+      			result = "COMPILATIONUNIT NOT IMPLEMENTED YET..."
+    		}
+
+      		/**
+ 			* This rule returns the code of a ImportDeclaration.
+ 			*/
+      		jast.ImportDeclaration::getImportDeclarationCode() : String {
+      			result = "IMPORTDECLARATION NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a MemberRef.
+ 			*/
+      		jast.MemberRef::getMemberRefCode() : String {
+      			result = "MEMBERREF NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a MemberValuePair.
+ 			*/
+      		jast.MemberValuePair::getMemberValuePairCode() : String {
+      			result = "MEMBERVALUEPAIR NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a MethodRef.
+ 			*/
+      		jast.MethodRef::getMethodRefCode() : String {
+      			result = "METHODREF NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a MethodRefParameter.
+ 			*/
+      		jast.MethodRefParameter::getMethodRefParameterCode() : String {
+      			result = "METHODREFPARAMETER NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a ExtendedModifier.
+ 			*/
+      		jast.ExtendedModifier::getExtendedModifierCode() : String {
+      			result = "EXTENDEDMODIFIER NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a Modifier.
+ 			*/
+      		jast.Modifier::getModifierCode() : String {
+      			    var temp : String = ""
+				    temp += self.public() + " ";
+				    temp += self._abstract() + " ";
+				    temp += self.static() + " ";
+				    temp += self.final() + " ";
+				    temp += self.native() + " ";
+				    temp += self.private() + " ";
+				    temp += self.final() + " ";
+				    temp += self.protected() + " ";
+				    temp += self.syncronized() + " ";
+				    temp += self.transient() + " ";
+				  	result = temp.normalizeSpace()
+    		}
+
+      		/**
+ 			* This rule returns the code of a PackageDeclaration.
+ 			*/
+      		jast.PackageDeclaration::getPackageDeclarationCode() : String {
+      			result = "PACKAGEDECLARATION NOT IMPLEMENTED YET..."
+    		}
+
+      		/**
+ 			* This rule returns the code of a TagElement.
+ 			*/
+      		jast.TagElement::getTagElementCode() : String {
+    			property starPrefix : String = "*"
+    			result += starPrefix + self.tagName + " "
+    			//self.nested
+    			self.fragments->forEach(element : jast.TextElement){
+     				result += element.text + "\n" + starPrefix 
+    			}
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a TextElement.
+ 			*/
+      		jast.TextElement::getTextElementCode() : String {
+      			result = self.text
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a TypeParameter.
+ 			*/
+      		jast.TypeParameter::getTypeParameterCode() : String {
+      			result = "TYPEPARAMETER NOT IMPLEMENTED YET..."
+    		}
+
+
+
+
+
+//************************* DELEGATION **************************
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a AnonymousClassDeclaration to another rule 
+* called getAnonymousClassDeclarationCode():String 
+*/
+jast.AnonymousClassDeclaration::getASTNodeCode() : String {
+result = self.getAnonymousClassDeclarationCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a BodyDeclaration to another rule 
+* called getBodyDeclarationCode():String 
+*/
+jast.BodyDeclaration::getASTNodeCode() : String {
+result = self.getBodyDeclarationCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a CatchClause to another rule 
+* called getCatchClauseCode():String 
+*/
+jast.CatchClause::getASTNodeCode() : String {
+result = self.getCatchClauseCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a Comment to another rule 
+* called getCommentCode():String 
+*/
+jast.Comment::getASTNodeCode() : String {
+result = self.getCommentCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a CompilationUnit to another rule 
+* called getCompilationUnitCode():String 
+*/
+jast.CompilationUnit::getASTNodeCode() : String {
+result = self.getCompilationUnitCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a Expression to another rule 
+* called getExpressionCode():String 
+*/
+jast.Expression::getASTNodeCode() : String {
+result = self.getExpressionCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a ImportDeclaration to another rule 
+* called getImportDeclarationCode():String 
+*/
+jast.ImportDeclaration::getASTNodeCode() : String {
+result = self.getImportDeclarationCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a MemberRef to another rule 
+* called getMemberRefCode():String 
+*/
+jast.MemberRef::getASTNodeCode() : String {
+result = self.getMemberRefCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a MemberValuePair to another rule 
+* called getMemberValuePairCode():String 
+*/
+jast.MemberValuePair::getASTNodeCode() : String {
+result = self.getMemberValuePairCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a MethodRef to another rule 
+* called getMethodRefCode():String 
+*/
+jast.MethodRef::getASTNodeCode() : String {
+result = self.getMethodRefCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a MethodRefParameter to another rule 
+* called getMethodRefParameterCode():String 
+*/
+jast.MethodRefParameter::getASTNodeCode() : String {
+result = self.getMethodRefParameterCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a ExtendedModifier to another rule 
+* called getExtendedModifierCode():String 
+*/
+jast.ExtendedModifier::getASTNodeCode() : String {
+result = self.getExtendedModifierCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a Modifier to another rule 
+* called getModifierCode():String 
+*/
+jast.Modifier::getASTNodeCode() : String {
+result = self.getModifierCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a PackageDeclaration to another rule 
+* called getPackageDeclarationCode():String 
+*/
+jast.PackageDeclaration::getASTNodeCode() : String {
+result = self.getPackageDeclarationCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a Statement to another rule 
+* called getStatementCode():String 
+*/
+jast.Statement::getASTNodeCode() : String {
+log("getStatementCode() delegation\n")
+result = self.getStatementCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a TagElement to another rule 
+* called getTagElementCode():String 
+*/
+jast.TagElement::getASTNodeCode() : String {
+result = self.getTagElementCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a TextElement to another rule 
+* called getTextElementCode():String 
+*/
+jast.TextElement::getASTNodeCode() : String {
+result = self.getTextElementCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a Type to another rule 
+* called getTypeCode():String 
+*/
+jast.Type::getASTNodeCode() : String {
+result = self.getTypeCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a TypeParameter to another rule 
+* called getTypeParameterCode():String 
+*/
+jast.TypeParameter::getASTNodeCode() : String {
+result = self.getTypeParameterCode()
+}
+
+
+	//belongs to ASTNode
+/**
+* This rule delegates the role of returning the code of a VariableDeclaration to another rule 
+* called getVariableDeclarationCode():String 
+*/
+jast.VariableDeclaration::getASTNodeCode() : String {
+result = self.getVariableDeclarationCode()
+}
+
+  
+}//textransformation

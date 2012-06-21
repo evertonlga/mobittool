@@ -1,0 +1,25 @@
+texttransformation NameTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a template for a QualifiedName.
+	*/
+	module::qualifiedNameTemplate(resolveBoxing:String, resolveUnboxing:String, fullyQualifiedName:String, name:String, qualifier:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: QualifiedName"
+
+	}
+
+
+	/*
+	* This rule defines a template for a SimpleName.
+	*/
+	module::simpleNameTemplate(resolveBoxing:String, resolveUnboxing:String, fullyQualifiedName:String, identifier:String, declaration:String){
+
+		// TODO code this template rule.
+		result += "// TODO define a template for: SimpleName"
+
+	}
+
+
+}

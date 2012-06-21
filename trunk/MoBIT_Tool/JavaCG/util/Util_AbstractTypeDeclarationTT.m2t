@@ -1,0 +1,48 @@
+import "../BodyDeclarationTT.m2t"
+
+textmodule Util_AbstractTypeDeclarationTT (in jast:"JavaAbstractSyntax"){
+  
+  	jast.TypeDeclaration::classORinterface(): String {
+  	 	if(self.interface){
+  	 	  result = "interface"
+  	 	}else{
+  	 	  result = "class"
+  	 	} 
+  	}// classORinterface
+  	
+	module::getSuperTypeDeclarationCode(superclassType : jast.Type) : String{
+  	 	if(superclassType != null){
+  	 	  
+  	 	  result = "extends" + " " + superclassType.getTypeCode()
+  	 	}else{
+  	 	  result = ""
+  	 	}
+	}//getSuperTypeDeclarationCode()
+	
+	module::getSuperInterfacesDeclarationCode(superInterfaces : List){
+	result = "interface"
+	 if(superInterfaces.isEmpty()){
+	   result = ""
+	 }else{
+	   superInterfaces->forEach(interface : jast.Type){
+	   	if(superInterfaces.last() == interface){
+	   	  result += interface.getTypeCode()
+	   	}
+	   }//forEach 
+	 }//else
+	 
+	}//getSuperInterfacesDeclarationCode()
+
+	module::getEnumConstantsCode(enumConstants : List){
+	  enumConstants->forEach(e : jast.EnumConstantDeclaration){
+	    	
+	  	//if(e != enumConstants.last()){
+	  	 	result += e.getEnumConstantDeclarationCode() + ",\n" 
+	  	//}else{
+	  	// 	 result += e.getEnumConstantDeclarationCode()
+	  //	}//elseif
+	  }//forEach
+	}//rule
+	
+	
+}//textmodule

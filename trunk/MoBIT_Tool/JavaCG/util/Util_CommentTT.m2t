@@ -1,0 +1,3 @@
+textmodule Util_CommentTT (in jast:"JavaAbstractSyntax"){
+  
+}

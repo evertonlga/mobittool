@@ -1,0 +1,3 @@
+textmodule Util_AnnotationTT (in jast:"JavaAbstractSyntax"){
+  
+}

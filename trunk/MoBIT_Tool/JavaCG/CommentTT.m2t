@@ -1,0 +1,90 @@
+import "util/Util_CommentTT.m2t"
+import "ASTNodeTT.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation CommentTT (in jast:"JavaAbstractSyntax") {
+
+  jast.Comment::getCommentCode() : String {
+    	log("getCommentCode() choice rule called")
+  		if(self.oclIsTypeOf(jast.BlockComment)) result = self.getBlockCommentCode()
+		else if(self.oclIsTypeOf(jast.Javadoc)) result = self.getJavadocCode()
+		else if(self.oclIsTypeOf(jast.LineComment)) result = self.getLineCommentCode()
+  }
+
+
+	//***** SPECIFIC *****
+
+      		/**
+ 			* This rule returns the code of a BlockComment.
+ 			*/
+      		jast.BlockComment::getBlockCommentCode() : String {
+      			result = "BLOCKCOMMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a Javadoc.
+ 			*/
+      		jast.Javadoc::getJavadocCode() : String {
+      		  	log("getJavadocCode() called.")
+      			    //self.alternateRoot
+				    
+				  	if(self.tags.isEmpty()){
+				  	  result = ""
+				  	}else{
+				  	  	var doc : String = ""
+				    	doc += "\n/** \n"
+				    	self.tags->forEach( tag : jast.TagElement){
+				     		doc+= tag.getASTNodeCode()
+				    	}
+				    	doc += "*\n"
+				  		doc += "*/\n"
+				  	  	result = doc
+				  	}
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a LineComment.
+ 			*/
+      		jast.LineComment::getLineCommentCode() : String {
+      			result = "LINECOMMENT NOT IMPLEMENTED YET..."
+    		}
+
+
+//*********************** DELEGATION ********************
+
+	//belongs to Comment
+/**
+* This rule delegates the role of returning the code of a BlockComment to another rule 
+* called getBlockCommentCode():String 
+*/
+jast.BlockComment::getCommentCode() : String {
+result = self.getBlockCommentCode()
+}
+
+
+	//belongs to Comment
+/**
+* This rule delegates the role of returning the code of a Javadoc to another rule 
+* called getJavadocCode():String 
+*/
+jast.Javadoc::getCommentCode() : String {
+result = self.getJavadocCode()
+}
+
+
+	//belongs to Comment
+/**
+* This rule delegates the role of returning the code of a LineComment to another rule 
+* called getLineCommentCode():String 
+*/
+jast.LineComment::getCommentCode() : String {
+result = self.getLineCommentCode()
+}
+
+}//textransformation

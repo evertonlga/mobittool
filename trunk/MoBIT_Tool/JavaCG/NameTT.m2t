@@ -1,0 +1,59 @@
+
+import "util/Util_NameTT.m2t"
+
+/**
+ *
+ * Template Transformation Example
+ *
+ */
+texttransformation NameTT (in jast:"JavaAbstractSyntax"){
+   
+  /**
+   *
+   */
+    jast.SimpleName::getNameCode() : String {
+      if(self.oclIsTypeOf(jast.SimpleName))result = self.getSimpleNameCode()
+      else if(self.oclIsTypeOf(jast.QualifiedName)) result = self.getQualifiedNameCode()
+	} 
+	
+	
+	// *** SPECIFICS ***
+
+      		/**
+ 			* This rule returns the code of a QualifiedName.
+ 			*/
+      		jast.QualifiedName::getQualifiedNameCode() : String {
+      			result =  self.qualifier.getNameCode() + "." + self.name.getNameCode()
+    		}
+
+
+      		/**
+ 			* This rule returns the code of a SimpleName.
+ 			*/
+      		jast.SimpleName::getSimpleNameCode() : String {
+      			result += self.fullyQualifiedName 
+    		}
+ 
+ 
+ //****************** DELEGATION *****************
+
+	//belongs to Name
+			/**
+			* This rule delegates the role of returning the code of a QualifiedName to another rule 
+			* called getQualifiedNameCode():String 
+			*/
+			jast.QualifiedName::getNameCode() : String {
+				result = self.getQualifiedNameCode()
+			}
+			
+			
+				//belongs to Name
+			/**
+			* This rule delegates the role of returning the code of a SimpleName to another rule 
+			* called getSimpleNameCode():String 
+			*/
+			jast.SimpleName::getNameCode() : String {
+				result = self.getSimpleNameCode()
+			}
+			
+}

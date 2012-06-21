@@ -1,0 +1,21 @@
+import "../AbstractTypeDeclarationTT.m2t"
+
+/**
+ * Main Text Trasformation
+ */
+texttransformation MainTransformation (in jast:"JavaAbstractSyntax") {
+
+	property extension : String = ".java"
+
+  /** 
+   * This rule returns the concrete code of a model rooted at a TypeDeclaration...
+   */
+	jast.AbstractTypeDeclaration::main(){
+	  	log("comecou!")
+	  	file(self.name.identifier.firstToUpper() + extension)
+	  	println(self.getAbstractTypeDeclarationCode())
+	  	log("terminou")
+	  	//println("print !!")
+	} 
+    
+}

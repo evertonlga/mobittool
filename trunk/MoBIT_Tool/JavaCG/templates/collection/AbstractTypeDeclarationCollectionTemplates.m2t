@@ -1,0 +1,56 @@
+import "../../AbstractTypeDeclarationTT.m2t"
+ 
+texttransformation AbstractTypeDeclarationCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a AnnotationTypeDeclaration.
+	*/
+	module::getAnnotationTypeDeclarationCollectionCode(annotationTypeDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		annotationTypeDeclarations->forEach(someAnnotationTypeDeclaration:JAS.AnnotationTypeDeclaration){
+			code += someAnnotationTypeDeclaration.getAnnotationTypeDeclarationCode()
+			if(someAnnotationTypeDeclaration != annotationTypeDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a EnumDeclaration.
+	*/
+	module::getEnumDeclarationCollectionCode(enumDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		enumDeclarations->forEach(someEnumDeclaration:JAS.EnumDeclaration){
+			code += someEnumDeclaration.getEnumDeclarationCode()
+			if(someEnumDeclaration != enumDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+ 
+	/*
+	* This rule defines a generic template for a collection of a TypeDeclaration.
+	*/
+	module::getTypeDeclarationCollectionCode(typeDeclarations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		typeDeclarations->forEach(someTypeDeclaration:JAS.TypeDeclaration){
+			code += someTypeDeclaration.getTypeDeclarationCode()
+			if(someTypeDeclaration != typeDeclarations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

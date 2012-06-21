@@ -1,0 +1,40 @@
+ 
+import "../../core/JavaCG.m2t"
+
+texttransformation NameCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a QualifiedName.
+	*/
+	module::getQualifiedNameCollectionCode(qualifiedNames : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		qualifiedNames->forEach(someQualifiedName:JAS.QualifiedName){
+			code += someQualifiedName.getQualifiedNameCode()
+			if(someQualifiedName != qualifiedNames.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+ 
+	/*
+	* This rule defines a generic template for a collection of a SimpleName.
+	*/
+	module::getSimpleNameCollectionCode(simpleNames : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		simpleNames->forEach(someSimpleName:JAS.SimpleName){
+			code += someSimpleName.getSimpleNameCode()
+			if(someSimpleName != simpleNames.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

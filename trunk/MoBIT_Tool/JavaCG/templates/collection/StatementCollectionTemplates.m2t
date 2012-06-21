@@ -1,0 +1,379 @@
+ 
+import "../../StatementTT.m2t"
+
+texttransformation StatementCollectionTemplates(in JAS:"JavaAbstractSyntax"){
+
+	/*
+	* This rule defines a generic template for a collection of a AssertStatement.
+	*/
+	module::getAssertStatementCollectionCode(assertStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		assertStatements->forEach(someAssertStatement:JAS.AssertStatement){
+			code += someAssertStatement.getAssertStatementCode()
+			if(someAssertStatement != assertStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a Block.
+	*/
+	module::getBlockCollectionCode(blocks : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		blocks->forEach(someBlock:JAS.Block){
+			code += someBlock.getBlockCode()
+			if(someBlock != blocks.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a BreakStatement.
+	*/
+	module::getBreakStatementCollectionCode(breakStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		breakStatements->forEach(someBreakStatement:JAS.BreakStatement){
+			code += someBreakStatement.getBreakStatementCode()
+			if(someBreakStatement != breakStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ConstructorInvocation.
+	*/
+	module::getConstructorInvocationCollectionCode(constructorInvocations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		constructorInvocations->forEach(someConstructorInvocation:JAS.ConstructorInvocation){
+			code += someConstructorInvocation.getConstructorInvocationCode()
+			if(someConstructorInvocation != constructorInvocations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ContinueStatement.
+	*/
+	module::getContinueStatementCollectionCode(continueStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		continueStatements->forEach(someContinueStatement:JAS.ContinueStatement){
+			code += someContinueStatement.getContinueStatementCode()
+			if(someContinueStatement != continueStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a DoStatement.
+	*/
+	module::getDoStatementCollectionCode(doStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		doStatements->forEach(someDoStatement:JAS.DoStatement){
+			code += someDoStatement.getDoStatementCode()
+			if(someDoStatement != doStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a EmptyStatement.
+	*/
+	module::getEmptyStatementCollectionCode(emptyStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		emptyStatements->forEach(someEmptyStatement:JAS.EmptyStatement){
+			code += someEmptyStatement.getEmptyStatementCode()
+			if(someEmptyStatement != emptyStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a EnhancedForStatement.
+	*/
+	module::getEnhancedForStatementCollectionCode(enhancedForStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		enhancedForStatements->forEach(someEnhancedForStatement:JAS.EnhancedForStatement){
+			code += someEnhancedForStatement.getEnhancedForStatementCode()
+			if(someEnhancedForStatement != enhancedForStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ExpressionStatement.
+	*/
+	module::getExpressionStatementCollectionCode(expressionStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		expressionStatements->forEach(someExpressionStatement:JAS.ExpressionStatement){
+			code += someExpressionStatement.getExpressionStatementCode()
+			if(someExpressionStatement != expressionStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ForStatement.
+	*/
+	module::getForStatementCollectionCode(forStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		forStatements->forEach(someForStatement:JAS.ForStatement){
+			code += someForStatement.getForStatementCode()
+			if(someForStatement != forStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a IfStatement.
+	*/
+	module::getIfStatementCollectionCode(ifStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		ifStatements->forEach(someIfStatement:JAS.IfStatement){
+			code += someIfStatement.getIfStatementCode()
+			if(someIfStatement != ifStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a LabeledStatement.
+	*/
+	module::getLabeledStatementCollectionCode(labeledStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		labeledStatements->forEach(someLabeledStatement:JAS.LabeledStatement){
+			code += someLabeledStatement.getLabeledStatementCode()
+			if(someLabeledStatement != labeledStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ReturnStatement.
+	*/
+	module::getReturnStatementCollectionCode(returnStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		returnStatements->forEach(someReturnStatement:JAS.ReturnStatement){
+			code += someReturnStatement.getReturnStatementCode()
+			if(someReturnStatement != returnStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SuperConstructorInvocation.
+	*/
+	module::getSuperConstructorInvocationCollectionCode(superConstructorInvocations : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		superConstructorInvocations->forEach(someSuperConstructorInvocation:JAS.SuperConstructorInvocation){
+			code += someSuperConstructorInvocation.getSuperConstructorInvocationCode()
+			if(someSuperConstructorInvocation != superConstructorInvocations.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SwitchCase.
+	*/
+	module::getSwitchCaseCollectionCode(switchCases : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		switchCases->forEach(someSwitchCase:JAS.SwitchCase){
+			code += someSwitchCase.getSwitchCaseCode()
+			if(someSwitchCase != switchCases.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SwitchStatement.
+	*/
+	module::getSwitchStatementCollectionCode(switchStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		switchStatements->forEach(someSwitchStatement:JAS.SwitchStatement){
+			code += someSwitchStatement.getSwitchStatementCode()
+			if(someSwitchStatement != switchStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a SynchronizedStatement.
+	*/
+	module::getSynchronizedStatementCollectionCode(synchronizedStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		synchronizedStatements->forEach(someSynchronizedStatement:JAS.SynchronizedStatement){
+			code += someSynchronizedStatement.getSynchronizedStatementCode()
+			if(someSynchronizedStatement != synchronizedStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a ThrowStatement.
+	*/
+	module::getThrowStatementCollectionCode(throwStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		throwStatements->forEach(someThrowStatement:JAS.ThrowStatement){
+			code += someThrowStatement.getThrowStatementCode()
+			if(someThrowStatement != throwStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a TryStatement.
+	*/
+	module::getTryStatementCollectionCode(tryStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		tryStatements->forEach(someTryStatement:JAS.TryStatement){
+			code += someTryStatement.getTryStatementCode()
+			if(someTryStatement != tryStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a TypeDeclarationStatement.
+	*/
+	module::getTypeDeclarationStatementCollectionCode(typeDeclarationStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		typeDeclarationStatements->forEach(someTypeDeclarationStatement:JAS.TypeDeclarationStatement){
+			code += someTypeDeclarationStatement.getTypeDeclarationStatementCode()
+			if(someTypeDeclarationStatement != typeDeclarationStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a VariableDeclarationStatement.
+	*/
+	module::getVariableDeclarationStatementCollectionCode(variableDeclarationStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		variableDeclarationStatements->forEach(someVariableDeclarationStatement:JAS.VariableDeclarationStatement){
+			code += someVariableDeclarationStatement.getVariableDeclarationStatementCode()
+			if(someVariableDeclarationStatement != variableDeclarationStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+	/*
+	* This rule defines a generic template for a collection of a WhileStatement.
+	*/
+	module::getWhileStatementCollectionCode(whileStatements : List, startingEmbrace : String, separator : String, endingEmbrace : String){
+
+		var code : String =""
+		code += startingEmbrace
+		whileStatements->forEach(someWhileStatement:JAS.WhileStatement){
+			code += someWhileStatement.getWhileStatementCode()
+			if(someWhileStatement != whileStatements.last()) code += separator
+		}
+		code += endingEmbrace
+		result = code
+
+	}
+
+
+}

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:KobrA="http:///schemas/KobrA/_X0EUsLTUEd28fvwbodXXUA/0" xmlns:MagicDrawProfile="http:///schemas/MagicDrawProfile/_X0OFsbTUEd28fvwbodXXUA/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/KobrA/_X0EUsLTUEd28fvwbodXXUA/0 KobrA.profile.uml#_X-WYBbTUEd28fvwbodXXUA http:///schemas/MagicDrawProfile/_X0OFsbTUEd28fvwbodXXUA/0 UML_Standard_Profile.MagicDraw_Profile.profile.uml#_X-WTJbTUEd28fvwbodXXUA">
+  <uml:Model xmi:id="eee_1045467100313_135436_1" name="Data" viewpoint="">
+    <ownedComment xmi:id="_15_5_a9502c6_1225138527796_800240_210" body="Author:Leandro.&#xA;Created:10/27/08 5:15 PM.&#xA;Title:.&#xA;Comment:.&#xA;" annotatedElement="eee_1045467100313_135436_1"/>
+    <packageImport xmi:id="_0primitiveTypesData">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packageImport xmi:id="_0javaPrimitiveTypesData">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_15_5_a9502c6_1225138799968_799817_367" name="Contexto">
+      <ownedAttribute xmi:id="_15_5_a9502c6_1225138841093_583016_487" name="" visibility="private" type="_15_5_a9502c6_1225138804093_205697_409" association="_15_5_a9502c6_1225138841093_156801_486"/>
+      <ownedAttribute xmi:id="_15_5_a9502c6_1225139092515_588112_652" name="" visibility="private" type="_15_5_a9502c6_1225139063203_452920_629" association="_15_5_a9502c6_1225139092500_786633_649"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_15_5_a9502c6_1225138804093_205697_409" name="Gerenciador">
+      <ownedAttribute xmi:id="_15_5_a9502c6_1225139096234_164252_656" name="" visibility="private" type="_15_5_a9502c6_1225139063203_452920_629" association="_15_5_a9502c6_1225139096234_814277_653"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_15_5_a9502c6_1225138841093_156801_486" name="" memberEnd="_15_5_a9502c6_1225138841093_582025_488 _15_5_a9502c6_1225138841093_583016_487">
+      <ownedEnd xmi:id="_15_5_a9502c6_1225138841093_582025_488" name="" visibility="private" type="_15_5_a9502c6_1225138799968_799817_367" association="_15_5_a9502c6_1225138841093_156801_486"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_15_5_a9502c6_1225139063203_452920_629" name="Livro">
+      <ownedOperation xmi:id="_15_5_a9502c6_1225139000984_110069_618" name="atualizar" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225139009906_588028_620" name="emprestar" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225139040203_402512_626" name="devolver" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225139025765_342134_624" name="reservar" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225139019968_843403_622" name="retornar" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_15_5_a9502c6_1225139092500_786633_649" name="" memberEnd="_15_5_a9502c6_1225139092515_588112_652 _15_5_a9502c6_1225139092515_500984_651">
+      <ownedEnd xmi:id="_15_5_a9502c6_1225139092515_500984_651" name="" visibility="private" type="_15_5_a9502c6_1225138799968_799817_367" association="_15_5_a9502c6_1225139092500_786633_649"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_15_5_a9502c6_1225139096234_814277_653" name="" memberEnd="_15_5_a9502c6_1225139096234_916058_655 _15_5_a9502c6_1225139096234_164252_656">
+      <ownedEnd xmi:id="_15_5_a9502c6_1225139096234_916058_655" name="" visibility="private" type="_15_5_a9502c6_1225138804093_205697_409" association="_15_5_a9502c6_1225139096234_814277_653"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_15_5_a9502c6_1225139132859_816243_659" name="Livro">
+      <region xmi:id="_15_5_a9502c6_1225139132859_555495_660" name="" visibility="public">
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_15_5_a9502c6_1225139140125_700820_680" name="" visibility="public" outgoing="_15_5_a9502c6_1225139219281_902796_749"/>
+        <subvertex xmi:type="uml:State" xmi:id="_15_5_a9502c6_1225139143828_229149_693" name="Disponivel" visibility="public" outgoing="_15_5_a9502c6_1225139227625_338439_765" incoming="_15_5_a9502c6_1225139274718_638527_877 _15_5_a9502c6_1225139282968_721161_893 _15_5_a9502c6_1225139219281_902796_749 _15_5_a9502c6_1225139230296_299011_781"/>
+        <subvertex xmi:type="uml:State" xmi:id="_15_5_a9502c6_1225139146890_101465_707" name="Reservado" visibility="public" outgoing="_15_5_a9502c6_1225139255765_747157_845 _15_5_a9502c6_1225139282968_721161_893" incoming="_15_5_a9502c6_1225139248125_670899_829 _15_5_a9502c6_1225139269421_423351_861"/>
+        <subvertex xmi:type="uml:State" xmi:id="_15_5_a9502c6_1225139149812_515298_721" name="Emprestado" visibility="public" outgoing="_15_5_a9502c6_1225139239843_719996_813 _15_5_a9502c6_1225139248125_670899_829 _15_5_a9502c6_1225139235031_635162_797 _15_5_a9502c6_1225139230296_299011_781" incoming="_15_5_a9502c6_1225139239843_719996_813 _15_5_a9502c6_1225139255765_747157_845 _15_5_a9502c6_1225139227625_338439_765"/>
+        <subvertex xmi:type="uml:State" xmi:id="_15_5_a9502c6_1225139152718_227145_735" name="Atrasado" visibility="public" outgoing="_15_5_a9502c6_1225139274718_638527_877 _15_5_a9502c6_1225139269421_423351_861" incoming="_15_5_a9502c6_1225139235031_635162_797"/>
+        <transition xmi:id="_15_5_a9502c6_1225139219281_902796_749" name="" visibility="public" target="_15_5_a9502c6_1225139143828_229149_693" source="_15_5_a9502c6_1225139140125_700820_680"/>
+        <transition xmi:id="_15_5_a9502c6_1225139227625_338439_765" name="" visibility="public" target="_15_5_a9502c6_1225139149812_515298_721" source="_15_5_a9502c6_1225139143828_229149_693">
+          <trigger xmi:id="_15_5_a9502c6_1225139347656_408082_911" name="" visibility="public" event="_15_5_a9502c6_1225139347656_556855_910"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139230296_299011_781" name="" visibility="public" target="_15_5_a9502c6_1225139143828_229149_693" source="_15_5_a9502c6_1225139149812_515298_721">
+          <trigger xmi:id="_15_5_a9502c6_1225139363625_733077_913" name="" visibility="public" event="_15_5_a9502c6_1225139363625_525975_912"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139235031_635162_797" name="" visibility="public" target="_15_5_a9502c6_1225139152718_227145_735" guard="_15_5_a9502c6_1225386521875_83270_526" source="_15_5_a9502c6_1225139149812_515298_721">
+          <ownedRule xmi:id="_15_5_a9502c6_1225386521875_83270_526" name="unnamed3">
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="_15_5_a9502c6_1225386521875_901742_527" name="">
+              <body>livro.compareDate(livro.daataEmprestimo, livro.hoje) = 1</body>
+            </specification>
+          </ownedRule>
+          <trigger xmi:id="_15_5_a9502c6_1225139508437_30047_925" name="" visibility="public" event="_15_5_a9502c6_1225139508437_208723_924"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139239843_719996_813" name="" visibility="public" target="_15_5_a9502c6_1225139149812_515298_721" source="_15_5_a9502c6_1225139149812_515298_721">
+          <trigger xmi:id="_15_5_a9502c6_1225139379828_46072_915" name="" visibility="public" event="_15_5_a9502c6_1225139379828_819292_914"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139248125_670899_829" name="" visibility="public" target="_15_5_a9502c6_1225139146890_101465_707" guard="_15_5_a9502c6_1225639878359_438548_513" source="_15_5_a9502c6_1225139149812_515298_721">
+          <ownedRule xmi:id="_15_5_a9502c6_1225639878359_438548_513" name="">
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="_15_5_a9502c6_1225639878359_237359_515" name="">
+              <body>livro.existeReserva()</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:id="_15_5_a9502c6_1225386234953_821667_514" name="">
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="_15_5_a9502c6_1225386234953_689095_515" name="">
+              <body></body>
+            </specification>
+          </ownedRule>
+          <trigger xmi:id="_15_5_a9502c6_1225639878359_401038_512" name="" visibility="public" event="_15_5_a9502c6_1225139363625_525975_912"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139255765_747157_845" name="" visibility="public" target="_15_5_a9502c6_1225139149812_515298_721" source="_15_5_a9502c6_1225139146890_101465_707">
+          <trigger xmi:id="_15_5_a9502c6_1225139443562_617124_919" name="" visibility="public" event="_15_5_a9502c6_1225139443562_461433_918"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139269421_423351_861" name="" visibility="public" target="_15_5_a9502c6_1225139146890_101465_707" guard="_15_5_a9502c6_1225386586328_910638_528" source="_15_5_a9502c6_1225139152718_227145_735">
+          <ownedRule xmi:id="_15_5_a9502c6_1225386586328_910638_528" name="unnamed4">
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="_15_5_a9502c6_1225386586328_56105_529" name="">
+              <body>livro.existeReserva()</body>
+            </specification>
+          </ownedRule>
+          <trigger xmi:id="_15_5_a9502c6_1225139474546_273517_923" name="" visibility="public" event="_15_5_a9502c6_1225139474546_359368_922"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139274718_638527_877" name="" visibility="public" target="_15_5_a9502c6_1225139143828_229149_693" source="_15_5_a9502c6_1225139152718_227145_735">
+          <trigger xmi:id="_15_5_a9502c6_1225139410671_72417_917" name="" visibility="public" event="_15_5_a9502c6_1225139410671_809980_916"/>
+        </transition>
+        <transition xmi:id="_15_5_a9502c6_1225139282968_721161_893" name="" visibility="public" target="_15_5_a9502c6_1225139143828_229149_693" guard="_15_5_a9502c6_1225386441687_501493_524" source="_15_5_a9502c6_1225139146890_101465_707">
+          <ownedRule xmi:id="_15_5_a9502c6_1225386441687_501493_524" name="unnamed2">
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="_15_5_a9502c6_1225386441687_947866_525" name="">
+              <body>livro.compareDatas (livro.dataReserva, livro.hoje) = -1</body>
+            </specification>
+          </ownedRule>
+          <trigger xmi:id="_15_5_a9502c6_1225139321265_489893_909" name="" visibility="public" event="_15_5_a9502c6_1225139321265_417853_908"/>
+        </transition>
+      </region>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_15_5_a9502c6_1225318617765_225493_511" name="TestableLivro">
+      <ownedOperation xmi:id="_15_5_a9502c6_1225318659296_509896_531" name="isInDisponivel" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225318693890_242532_533" name="isInReservado" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225318715734_859612_535" name="isInEmprestado" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225318726703_439354_537" name="isInAtrasado" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225322290125_580597_896" name="setToDisponivel" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225322302140_918409_898" name="setToReservado" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225322315828_893464_900" name="setToEmprestado" visibility="public"/>
+      <ownedOperation xmi:id="_15_5_a9502c6_1225322326843_973248_902" name="setToAtrasado" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="magicdraw_uml_standard_profile_v_0001" name="UML Standard Profile">
+      <ownedComment xmi:id="_be00301_1078843546940_242228_131" body="UML Standard Profile contains several popular stereotypes, tag definitions and constraints described in UML  2 Specifications." annotatedElement="magicdraw_uml_standard_profile_v_0001"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139321265_417853_908" name="" operation="_15_5_a9502c6_1225139000984_110069_618"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139347656_556855_910" name="" operation="_15_5_a9502c6_1225139009906_588028_620"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139363625_525975_912" name="" operation="_15_5_a9502c6_1225139019968_843403_622"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139379828_819292_914" name="" operation="_15_5_a9502c6_1225139025765_342134_624"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139410671_809980_916" name="" operation="_15_5_a9502c6_1225139040203_402512_626"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139443562_461433_918" name="" operation="_15_5_a9502c6_1225139009906_588028_620"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139474546_359368_922" name="" operation="_15_5_a9502c6_1225139040203_402512_626"/>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_15_5_a9502c6_1225139508437_208723_924" name="" operation="_15_5_a9502c6_1225139000984_110069_618"/>
+    <profileApplication xmi:id="_15_5_a9502c6_1225138864875_504994_589profileApplicationData">
+      <eAnnotations xmi:id="_X-WSXbTUEd28fvwbodXXUA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="KobrA.profile.uml#_X-WYBbTUEd28fvwbodXXUA"/>
+      </eAnnotations>
+      <appliedProfile href="KobrA.profile.uml#_15_5_a9502c6_1225138864875_504994_589"/>
+    </profileApplication>
+    <profileApplication xmi:id="_11_5_f720368_1159529670215_231387_1profileApplicationData">
+      <eAnnotations xmi:id="_X-WSX7TUEd28fvwbodXXUA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="UML_Standard_Profile.Validation_Profile.profile.uml#_X-WWQbTUEd28fvwbodXXUA"/>
+      </eAnnotations>
+      <appliedProfile href="UML_Standard_Profile.Validation_Profile.profile.uml#_11_5_f720368_1159529670215_231387_1"/>
+    </profileApplication>
+    <profileApplication xmi:id="_9_0_be00301_1108050582343_527400_10847profileApplicationData">
+      <eAnnotations xmi:id="_X-WSYbTUEd28fvwbodXXUA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="UML_Standard_Profile.UML_Standard_Profile.profile.uml#_X-WUl7TUEd28fvwbodXXUA"/>
+      </eAnnotations>
+      <appliedProfile href="UML_Standard_Profile.UML_Standard_Profile.profile.uml#_9_0_be00301_1108050582343_527400_10847"/>
+    </profileApplication>
+    <profileApplication xmi:id="_be00301_1073394351331_445580_2profileApplicationData">
+      <eAnnotations xmi:id="_X-WSY7TUEd28fvwbodXXUA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="UML_Standard_Profile.MagicDraw_Profile.profile.uml#_X-WTJbTUEd28fvwbodXXUA"/>
+      </eAnnotations>
+      <appliedProfile href="UML_Standard_Profile.MagicDraw_Profile.profile.uml#_be00301_1073394351331_445580_2"/>
+    </profileApplication>
+    <profileApplication xmi:id="_11_5_be00301_1153310565718_226811_161profileApplicationData">
+      <eAnnotations xmi:id="_X-WSZbTUEd28fvwbodXXUA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml#_X-WSaLTUEd28fvwbodXXUA"/>
+      </eAnnotations>
+      <appliedProfile href="UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml#_11_5_be00301_1153310565718_226811_161"/>
+    </profileApplication>
+  </uml:Model>
+  <KobrA:creates xmi:id="_X-gDELTUEd28fvwbodXXUA" base_Element="_15_5_a9502c6_1225138841093_156801_486"/>
+  <KobrA:creates xmi:id="_X-gDEbTUEd28fvwbodXXUA" base_Element="_15_5_a9502c6_1225139092500_786633_649"/>
+  <KobrA:acquires xmi:id="_X-gDErTUEd28fvwbodXXUA" base_Element="_15_5_a9502c6_1225139096234_814277_653"/>
+  <KobrA:Context xmi:id="_X-gDE7TUEd28fvwbodXXUA" base_Element="_15_5_a9502c6_1225138799968_799817_367"/>
+  <MagicDrawProfile:auxiliaryResource xmi:id="_YDHdXbTUEd28fvwbodXXUA" base_Element="magicdraw_uml_standard_profile_v_0001" base_Package="magicdraw_uml_standard_profile_v_0001"/>
+</xmi:XMI>

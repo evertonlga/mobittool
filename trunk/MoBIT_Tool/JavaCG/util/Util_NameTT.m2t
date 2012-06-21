@@ -1,0 +1,17 @@
+import "../NameTT.m2t"
+
+textmodule Util_NameTT (in jast:"JavaAbstractSyntax"){
+  
+  module:: getThrownExceptions(tlist : List) : String {
+   if(not tlist.isEmpty()){
+     	result += "throws "
+     	tlist->forEach(ex : jast.Name){
+     	 result += ex.getNameCode()
+     	 if(tlist.last() != ex) result += ", " 
+     	}
+   }else{
+    	result = "" 
+   }
+  }//getThrownExceptions
+  
+}
