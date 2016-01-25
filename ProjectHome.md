@@ -1,0 +1,1 @@
+Tool developed in order to automatically generate the testing architecture artifacts according with the BIT method.
